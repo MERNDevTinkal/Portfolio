@@ -41,7 +41,7 @@ export function Hero() {
   };
 
   return (
-    <SectionWrapper id="home" className="pt-8 md:pt-12 bg-gradient-to-br from-background via-card to-secondary/10 dark:to-secondary/20">
+    <SectionWrapper id="home" className="pt-8 md:pt-12 bg-gradient-to-br from-background via-card to-secondary/10 dark:to-secondary/20 overflow-hidden w-full max-w-full">
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <motion.div
           variants={textContainerVariants}
@@ -123,7 +123,7 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.8, x: 50 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.8, type: "spring", stiffness: 100 }}
-          className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto"
+          className="w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto flex justify-center items-center overflow-hidden"
         >
           <Swiper
             modules={[Autoplay, Pagination]}
@@ -141,7 +141,7 @@ export function Hero() {
             {PROFILE_IMAGES.map((image, index) => (
               <SwiperSlide key={image.src || index}>
                 <motion.div
-                  className="relative w-full h-full"
+                  className="relative w-full h-full max-w-full"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, ease: "easeInOut", delay: 0.1 }}
