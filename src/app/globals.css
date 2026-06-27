@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* Pure White */
-    --foreground: 222 47% 11%; /* Dark Blue */
-    --card: 0 0% 98%; /* Very Light Gray (almost white) */
+    --background: 210 40% 98%; /* Beautiful Off-White / Pearl */
+    --foreground: 222 47% 11%; /* Deep Navy for sharp contrast */
+    --card: 0 0% 100%; /* Pure White for cards to pop against off-white background */
     --card-foreground: 222 47% 11%;
-    --popover: 0 0% 100%; /* Pure White */
+    --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-    --primary: 221 83% 53%; /* Strong, Clean Blue */
-    --primary-foreground: 0 0% 100%; /* White */
-    --secondary: 220 13% 91%; /* Light Neutral Gray-Blue */
-    --secondary-foreground: 222 47% 11%; /* Dark Blue */
-    --muted: 220 14% 96%; /* Very Light Gray */
-    --muted-foreground: 220 9% 46%; /* Softer Gray */
-    --accent: 24 94% 50%; /* Vibrant Orange */
-    --accent-foreground: 0 0% 100%; /* White */
+    --primary: 221 83% 53%; /* Keep the brand blue */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 214 32% 91%; /* Cooler, softer gray-blue */
+    --secondary-foreground: 222 47% 11%;
+    --muted: 214 32% 91%;
+    --muted-foreground: 215 16% 47%; /* Clearer muted text */
+    --accent: 24 94% 50%; /* Keep vibrant orange */
+    --accent-foreground: 210 40% 98%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 220 13% 89%; /* Light Clean Border */
-    --input: 220 13% 91%; /* Slightly Darker Input Background/Border */
-    --ring: 221 83% 53%; /* Primary color for rings */
+    --destructive-foreground: 210 40% 98%;
+    --border: 214 32% 91%; /* Softer borders */
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
     
     --chart-1: hsl(var(--primary));
     --chart-2: hsl(var(--accent));
@@ -95,21 +95,24 @@
 
 @layer utilities {
   .glass {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 dark:bg-black/20 dark:border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)];
+    @apply bg-white/40 backdrop-blur-md border border-white/60 dark:bg-black/20 dark:border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.05)];
   }
 
   .glass-card {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10 dark:bg-white/5 dark:border-white/5 shadow-xl hover:shadow-2xl transition-all duration-300;
+    @apply bg-white/60 backdrop-blur-lg border border-white/80 dark:bg-white/5 dark:border-white/5 shadow-xl hover:shadow-2xl transition-all duration-300;
   }
 
   .text-glow {
+    text-shadow: 0 0 15px rgba(var(--primary), 0.3);
+  }
+  .dark .text-glow {
     text-shadow: 0 0 20px rgba(var(--primary), 0.5);
   }
 
   .aurora-bg {
     @apply relative overflow-hidden;
     background: linear-gradient(
-      45deg,
+      135deg,
       hsl(var(--background)) 0%,
       hsl(var(--card)) 100%
     );
@@ -117,18 +120,18 @@
 
   .aurora-bg::before {
     content: "";
-    @apply absolute inset-0 opacity-30 dark:opacity-20 pointer-events-none;
+    @apply absolute inset-0 opacity-50 dark:opacity-20 pointer-events-none;
     background: radial-gradient(
         circle at 0% 0%,
-        hsla(var(--primary)/0.3) 0%,
+        hsla(var(--primary)/0.15) 0%,
         transparent 50%
       ),
       radial-gradient(
         circle at 100% 100%,
-        hsla(var(--accent)/0.3) 0%,
+        hsla(var(--accent)/0.15) 0%,
         transparent 50%
       );
-    filter: blur(60px);
+    filter: blur(80px);
     animation: aurora-shift 15s ease-in-out infinite alternate;
   }
 
