@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import { APP_NAME, AUTHOR_NAME, AUTHOR_EMAIL, SOCIAL_LINKS, LOGO_PATH } from "@/lib/data";
 import { DynamicChatbotLoader } from "@/components/layout/DynamicChatbotLoader";
+import { CommandPalette } from "@/components/layout/CommandPalette";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -93,6 +94,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-body antialiased`}>
         <ThemeProvider>
           <Navbar />
+          <CommandPalette />
           <main className="flex-grow pt-20"> 
             {children}
           </main>
