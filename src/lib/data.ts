@@ -5,7 +5,7 @@ import {
   ServerCog, Wand2, Palette, Settings2, ShoppingCart, FileText, BookOpen,
   GraduationCap, Building, Award, ExternalLink, UserCircle2, KeyRound, ShieldCheck,
   UploadCloud, Smartphone, Layers, Puzzle, Lightbulb, TerminalSquare, GitCommit, Wrench,
-  Send, Brain, MessageSquareText, Rocket, NotebookText, Scale, Instagram
+  Send, Brain, MessageSquareText, Rocket, NotebookText, Scale, Instagram, BarChart3, Video
 } from 'lucide-react';
 
 import {
@@ -25,9 +25,10 @@ export const SORA_AVATAR_URL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:
 
 export const NAV_LINKS = [
   { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
-  { name: "Blogs", href: "#blogs" },
+  { name: "Industries", href: "#industries" },
+  { name: "Services", href: "#services" },
+  { name: "About", href: "#about" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -39,189 +40,34 @@ export const SOCIAL_LINKS = [
 ];
 
 export const HERO_TITLES = [
-  "Full Stack Engineer",            // 1
-  "DevOps-Oriented Software Engineer",       // 2
-  "Cloud-Focused Application Engineer",      // 3
-  "AWS Cloud Practitioner",                  // 4
-  "Infrastructure as Code Engineer",         // 5
-  "Automation-Driven Engineer",              // 6
-  "Scalable Systems Engineer",
-  "Terraform Infrastructure Engineer",         // 71
-  "Cloud Resource Automation Engineer",        // 72
-  "Provisioning and Deployment Engineer",      // 73
-  "IaC-Focused DevOps Engineer",                // 74
-  "Repeatable Infrastructure Specialist",      // 75
-  "Cloud Environment Engineer",                // 76
-  "Infrastructure Lifecycle Manager",          // 77
-  "Automated Infrastructure Developer",        // 78
-  "Cloud Provisioning Specialist",             // 79
-  "Declarative Infrastructure Engineer",       // 80
-  "Production-Ready Application Developer",  // 8
-  "Cloud-Native Software Engineer",           // 9
-  "Reliability-Focused Engineer",
-  "DevOps Engineer (AWS)",                    // 21
-  "Cloud Infrastructure Engineer",            // 22
-  "CI/CD Pipeline Engineer",                  // 23
-  "Build and Release Automation Engineer",    // 24
-  "Docker and Containerization Engineer",     // 25
-  "Infrastructure Automation Engineer",       // 26
-  "Cloud Deployment Specialist",              // 27
-  "Environment Automation Engineer",          // 28
-  "DevOps Automation Specialist",             // 29
-  "Cloud Operations Engineer",                // 30
-  "Cloud Security Engineer",                  // 31
-  "Cloud Security Specialist",                // 32
-  "Scalable Backend Engineer",                // 31
-  "Distributed Systems Enthusiast",           // 32
-  "High-Availability Systems Builder",        // 33
-  "Performance-Oriented Engineer",            // 34
-  "Fault-Tolerant Application Developer",     // 35
-  "System Scalability Engineer",               // 36
-  "Cloud Scalability Specialist",              // 37
-  "Load-Aware Application Engineer",           // 38
-  "System Optimization Engineer",              // 39
-  "Cloud Performance Engineer",                // 40
-  "Secure Application Developer",              // 41
-  "Cloud Security-Aware Engineer",             // 42
-  "Security-First Software Engineer",          // 43
-  "IAM and Access Control Practitioner",       // 44
-  "Infrastructure Security Engineer",          // 45
-  "Secure Cloud Deployment Engineer",          // 46
-  "Compliance-Conscious Engineer",             // 47
-  "Security-Driven DevOps Engineer",           // 48
-  "Application Hardening Specialist",          // 49
-  "Cloud Risk-Aware Engineer",
-  "Node.js Backend Engineer",                  // 61
-  "REST API Developer",                        // 62
-  "API-First Application Engineer",            // 63
-  "Backend Services Engineer",                 // 64
-  "Server-Side Application Developer",
-  "Monitoring and Observability Engineer",     // 81
-  "Cloud Monitoring Specialist",               // 82
-  "System Health and Alerting Engineer",        // 83
-  "Proactive Operations Engineer",              // 84
-  "Cloud Reliability Practitioner",            // 85
-  "Metrics-Driven Engineer",                   // 86
-  "Operational Visibility Engineer",           // 87
-  "Incident-Aware Engineer",                   // 88
-  "Production Monitoring Engineer",            // 89
-  "Infrastructure Observability Engineer",     // 90
-
-  // 91–100
-  "Agile Software Engineer",                    // 91
-  "Continuous Improvement Engineer",           // 92
-  "Automation-First Developer",                // 93
-  "DevOps Culture Advocate",                   // 94
-  "Engineering Best Practices Follower",       // 95
-  "Clean Code Practitioner",                   // 96
-  "Maintainable Systems Engineer",             // 97
-  "Engineering Quality Advocate",              // 98
-  "Process-Oriented Engineer",                 // 99
-  "Operational Excellence Engineer",           // 100
-  "Cloud Application Engineer",                // 101
-  "Serverless-Aware Developer",                // 102
-  "Cloud Service Integration Engineer",        // 103
-  "AWS Services Practitioner",                 // 104
-  "Cloud Resource Optimization Engineer",      // 105
-  "Cost-Aware Cloud Engineer",                 // 106
-  "Cloud Architecture Learner",                // 107
-  "Cloud Systems Engineer",                    // 108
-  "Cloud Enablement Engineer",                 // 109
-  "Platform Engineering Enthusiast",           // 110
-  "Problem-Solving Software Engineer",          // 111
-  "Technology-Driven Engineer",                // 112
-  "Engineering Growth Mindset Practitioner",   // 113
-  "Modern Software Engineering Professional",  // 114
-  "Real-World Systems Builder",                // 115
-  "Business-Aware Engineer",                   // 116
-  "Solution-Oriented Developer",               // 117
-  "Production Systems Engineer",               // 118
-  "Scalable Product Engineer",                 // 119
-  "Cloud-Ready Software Engineer",             // 120
-  "Automation and Reliability Engineer",       // 121
-  "DevOps and Cloud Practitioner",              // 122
-  "Infrastructure and Application Engineer",   // 123
-  "End-to-End Cloud Engineer",                 // 124
-  "Future-Ready Software Engineer",
-  "Next.js Specialist",
-  "React Virtuoso",
-  "Node.js Architect",
-  "TypeScript Advocate",
-  "AI Integration Specialist",
-  "Innovative Problem Solver",
-  "End-to-End Application Developer",
-  "Versatile Software Engineer",
-  "Cross-Functional Developer",
-  "Dynamic Web App Creator",
-  "Interactive UI Developer",
-  "Responsive Design Expert",
-  "Frontend Performance Optimizer",
-  "Modern JavaScript Artisan",
-  "Scalable Backend Developer",
-  "API Design Specialist",
-  "Server-Side Logic Expert",
-  "Database Integration Pro",
-  "Cloud-Native Developer",
-  "Agile Software Developer",
-  "DevOps-Minded Engineer",
-  "E-commerce Solutions Developer",
-  "SaaS Application Engineer",
-  "Real-time Application Developer",
-  "Secure Software Developer",
-  "AI-Powered Solutions Developer",
-  "Intelligent Systems Engineer",
-  "Machine Learning Implementer",
-  "Smart Application Architect",
-  "Next-Gen Web Innovator",
-  "Complex Problem Tackler",
-  "User-Centric Solutions Builder",
-  "Technology Modernization Expert",
-  "Digital Experience Enhancer",
-  "Code Craftsman",
-  "Digital Product Developer",
-  "Performance-Driven Developer",
-  "Proficient Full Stack Specialist",
-  "Next.js Application Architect",
-  "Creative React Developer",
-  "Robust Node.js Developer",
-  "GraphQL API Developer",
-  "Headless CMS Integrator",
-  "Progressive Web App (PWA) Developer",
-  "Solution-Oriented Programmer",
-  "Web Performance Guru",
-  "Cloud Solutions Developer",
-  "Full Stack JavaScript Expert",
-  "Serverless Application Developer",
-  "API-First Developer",
-  "User Experience Advocate",
-  "Agile Methodology Practitioner",
-  "Scalable Systems Designer",
-  "Code Quality Champion",
-  "Emerging Tech Explorer",
-  "Digital Transformation Agent"
+  "MERN Stack Developer",
+  "React & Next.js Engineer",
+  "Node.js Backend Specialist",
+  "Full Stack Application Developer",
+  "TypeScript & JavaScript Expert",
+  "Production Web application Builder",
+  "API & Microservices Engineer",
+  "Real-Time Systems Developer",
 ];
 
 export const PROFILE_IMAGES = [
-  { src: "/profile-1.jpg", alt: "Tinkal Kumar - Professional Headshot", dataAiHint: "professional man" },
-  { src: "/profile-2.jpg", alt: "Tinkal Kumar - Working at a desk", dataAiHint: "developer coding" },
-  /* { src: "/profile-3.jpg", alt: "Tinkal Kumar - Casual Portrait", dataAiHint: "man portrait" },
-   { src: "/profile-4.jpg", alt: "Tinkal Kumar - Tech Event", dataAiHint: "developer conference" },*/
+  { src: "/profile-1.jpg", alt: "Tinkal Kumar - MERN Stack Developer", dataAiHint: "professional man" },
 ];
 
 export const RESUME_PATH = "/Tinkal_Resume.pdf";
 
 export const ABOUT_ME = {
-  summary: `Results-driven software engineer with strong experience in full-stack web development and growing expertise in DevOps and AWS cloud technologies. Skilled in building scalable applications using MongoDB, Express.js, React.js, and Node.js, along with deploying, monitoring, and securing applications on AWS. Hands-on experience with Docker, CI/CD pipelines, infrastructure automation, and cloud security best practices. Passionate about clean code, system reliability, performance optimization, and continuously learning modern cloud-native and DevOps technologies.`,
-  passion: "Driven by a strong curiosity for cloud computing and automation, I enjoy working at the intersection of development and operations. I am particularly interested in DevOps tooling, infrastructure as code, CI/CD automation, and improving system reliability while continuing to build impactful, production-ready applications.",
+  summary: `MERN Stack Developer and Full Stack Engineer specialized in building production-grade web applications. I develop scalable, high-performance applications using React, Next.js, Node.js, Express, and TypeScript. With hands-on experience across healthcare, veterinary, wellness, and entertainment platforms, I build backend APIs, implement real-time communication systems, and ensure robust cloud deployments. My expertise spans MERN stack architecture, REST APIs, WebSockets, third-party integrations, AWS services, Docker, and production-level debugging and optimization.`,
+  passion: "I am passionate about building real-world software that solves business problems. I focus on clean architecture, performance optimization, secure authentication systems, and scalable infrastructure. I thrive working on production applications that serve actual users and contribute to measurable business outcomes.",
   location: "Jaipur, India",
-  relocation: "Open to relocating for compelling opportunities",
+  relocation: "Available for freelance projects worldwide",
   IconLocation: MapPin,
   IconRelocation: Briefcase,
   IconAbout: UserCircle2,
   image: {
-    src: "/Tech-focused-image.png",
-    alt: "Tinkal Kumar - Tech focused image",
-    dataAiHint: "technology developer",
+    src: "/profile-1.jpg",
+    alt: "Tinkal Kumar - MERN Stack Developer",
+    dataAiHint: "professional developer",
   },
 };
 
@@ -263,47 +109,34 @@ export const WORK_EXPERIENCE_DATA: ExperienceEntry[] = [
    {
     title: "MERN Stack Developer",
     company: "JPLoft",
-    duration: "Aprail 2026 – Present ",
+    duration: "April 2026 – Present",
     location: "Jaipur, Rajasthan",
      responsibilities: [
-    "Developed and maintained scalable full-stack applications using the MERN stack (MongoDB, Express.js, React.js, Node.js) with TypeScript.",
-    "Designed and implemented robust RESTful APIs using NestJS, ensuring clean architecture and high performance.",
-    "Integrated multiple third-party APIs and services, handling authentication, data synchronization, and error management efficiently.",
-    "Managed cloud infrastructure and deployments on AWS, including S3 for storage, server management, and CI/CD pipelines.",
-    "Optimized application performance through reusable components, efficient state management, and code refactoring.",
-    "Implemented secure authentication and authorization systems using JWT and role-based access control.",
-    "Collaborated in agile teams to deliver high-quality, production-ready solutions aligned with client requirements."
+    "Develop and maintain scalable full-stack applications using the MERN stack (MongoDB, Express.js, React.js, Node.js) with TypeScript.",
+    "Design and implement robust RESTful APIs and microservices architecture.",
+    "Integrate third-party APIs and services including payment gateways, communication platforms, and analytics tools.",
+    "Manage cloud deployments on AWS including S3, EC2, and RDS databases.",
+    "Implement WebSocket-based real-time communication systems.",
+    "Optimize application performance and implement comprehensive error handling.",
+    "Collaborate in agile teams to deliver production-ready solutions."
   ],
     Icon: Building,
   },
   {
     title: "MERN Stack Developer",
     company: "OweBest Technologies Pvt Ltd",
-    duration: "Feb 2025 – March 2026",
+    duration: "February 2025 – March 2026",
     location: "Jaipur, Rajasthan",
     responsibilities: [
-      "Developing and maintaining scalable full-stack web applications using the MERN stack (MongoDB, Express.js, React.js, Node.js) and TypeScript.",
-      "Designing and implementing RESTful APIs for seamless frontend-backend communication.",
-      "Focusing on writing clean, maintainable, and efficient code with an emphasis on component reusability and performance optimization.",
-      "Collaborating closely with cross-functional teams in an agile environment to deliver high-quality software solutions for real-world client projects.",
-      "Implementing user authentication and authorization mechanisms.",
-      "Integrating third-party services and APIs as per project requirements."
+      "Developed and maintained scalable full-stack web applications using MERN stack and TypeScript.",
+      "Designed and implemented RESTful APIs for seamless frontend-backend communication.",
+      "Focused on writing clean, maintainable code with emphasis on component reusability and performance.",
+      "Collaborated with cross-functional teams in agile environment to deliver client-driven solutions.",
+      "Implemented authentication, authorization, and data validation mechanisms.",
+      "Integrated third-party services and APIs per project requirements."
     ],
     Icon: Building,
   },
-  // {
-  //   title: "IT Executive",
-  //   company: "Apex Hospitals, Jaipur",
-  //   duration: "Aug 2024 – Feb 2025",
-  //   location: "Jaipur, Rajasthan",
-  //   responsibilities: [
-  //     "Managed and updated content for the hospital's official website and internal applications, ensuring accuracy and timeliness.",
-  //     "Provided technical support and troubleshooting for the Hospital Management System (HMS), resolving issues to ensure smooth operations.",
-  //     "Facilitated communication between medical staff and software vendors to address system requirements and enhancements.",
-  //     "Built reusable UI components using HTML, CSS, and JavaScript to improve website consistency and development speed."
-  //   ],
-  //   Icon: Building,
-  // },
 ];
 
 export interface CertificationEntry {
@@ -509,72 +342,264 @@ export interface Project {
 }
 
 export const PROJECTS_DATA: Project[] = [
-  // {
-  //   id: "job-portal",
-  //   title: "Job Portal App (Next.js & MERN)",
-  //   description: "A comprehensive platform for job seekers and employers, featuring a Next.js frontend and a robust MERN stack backend (MongoDB, Express.js, Node.js). Implements JWT authentication, Nodemailer for notifications, Multer for file uploads, Bcrypt for password hashing, protected routes, and role-based authorization. Currently undergoing enhancements by Tinkal.",
-  //   liveDemoUrl: "#",
-  //   githubRepoUrl: "https://github.com/MERNDevTinkal/Job-Portal-App",
-  //   techStack: [
-  //     { name: "Next.js", Icon: CodeXml },
-  //     { name: "Node.js", Icon: ServerCog },
-  //     { name: "MongoDB", Icon: Database },
-  //     { name: "Express.js", Icon: ServerCog },
-  //     { name: "TypeScript", Icon: CodeXml },
-  //     { name: "JWT Auth", Icon: KeyRound },
-  //     { name: "Nodemailer", Icon: Mail },
-  //     { name: "Multer", Icon: UploadCloud },
-  //     { name: "Bcrypt", Icon: ShieldCheck },
-  //   ],
-  //   Icon: Briefcase,
-  // },
+  {
+    id: "kinnect",
+    title: "Kinnect – Veterinary Healthcare Platform",
+    description:
+      "Production veterinary healthcare software serving veterinary practices. Engineered key features including real-time communication with WebSocket integration, voice/video calling via ZEGOCLOUD, webinar infrastructure with AWS IVS integration, appointment scheduling, user and role management, notifications, and AWS S3 integration.",
+    liveDemoUrl: "https://kinnect.vet/",
+    githubRepoUrl: "#",
+    techStack: [
+      { name: "React", Icon: CodeXml },
+      { name: "Node.js", Icon: ServerCog },
+      { name: "Express.js", Icon: ServerCog },
+      { name: "MongoDB", Icon: Database },
+      { name: "TypeScript", Icon: CodeXml },
+      { name: "WebSocket", Icon: Network },
+      { name: "ZEGOCLOUD", Icon: Phone },
+      { name: "AWS S3", Icon: Database },
+      { name: "AWS IVS", Icon: Video },
+      { name: "Redis", Icon: Zap },
+    ],
+    Icon: Briefcase,
+  },
+  {
+    id: "medconcerns",
+    title: "MedConcerns – Healthcare Platform",
+    description:
+      "Healthcare software platform built on MERN stack designed to support digital healthcare workflows. Implemented backend API services, user authentication and role-based access control, third-party service integrations, and production deployment architecture.",
+    liveDemoUrl: "https://app.medconcerns.com/",
+    githubRepoUrl: "#",
+    techStack: [
+      { name: "React", Icon: CodeXml },
+      { name: "Node.js", Icon: ServerCog },
+      { name: "Express.js", Icon: ServerCog },
+      { name: "MongoDB", Icon: Database },
+      { name: "TypeScript", Icon: CodeXml },
+      { name: "REST APIs", Icon: Network },
+      { name: "JWT Auth", Icon: KeyRound },
+      { name: "AWS", Icon: Database },
+    ],
+    Icon: Briefcase,
+  },
+  {
+    id: "soundara",
+    title: "Soundara – Wellness Music Platform",
+    description:
+      "Wellness and music technology platform providing curated musical experiences. Contributed to platform architecture and user experience optimization on production systems serving music and wellness applications.",
+    liveDemoUrl: "https://www.soundara.com/",
+    githubRepoUrl: "#",
+    techStack: [
+      { name: "React", Icon: CodeXml },
+      { name: "Node.js", Icon: ServerCog },
+      { name: "MongoDB", Icon: Database },
+      { name: "REST APIs", Icon: Network },
+      { name: "AWS", Icon: Database },
+    ],
+    Icon: Briefcase,
+  },
+  {
+    id: "wonder-wrestlers",
+    title: "Wonder Wrestlers – Entertainment Platform",
+    description:
+      "Entertainment and events digital platform. Engineered backend systems, user workflows, event management features, and real-time communication infrastructure.",
+    liveDemoUrl: "https://www.wonderwrestlers.com/",
+    githubRepoUrl: "#",
+    techStack: [
+      { name: "React", Icon: CodeXml },
+      { name: "Node.js", Icon: ServerCog },
+      { name: "MongoDB", Icon: Database },
+      { name: "Express.js", Icon: ServerCog },
+      { name: "REST APIs", Icon: Network },
+    ],
+    Icon: Briefcase,
+  },
   {
     id: "docvault-pro",
-    title: "DocVault Pro – Cloud-Native Serverless Document Platform",
+    title: "DocVault Pro – Cloud-Native Document Platform",
     description:
-      "A production-grade DevOps project implementing a serverless document upload system using AWS, Terraform, and CI/CD pipelines with secure automation.",
+      "Production-grade serverless document management system. Implemented AWS infrastructure including Lambda functions for document processing, API Gateway for RESTful endpoints, S3 for secure storage, and DynamoDB for metadata. Automated infrastructure using Terraform with CI/CD pipelines via GitHub Actions.",
     liveDemoUrl: "https://github.com/MERNDevTinkal/DocVault-Pro",
     githubRepoUrl: "https://github.com/MERNDevTinkal/DocVault-Pro",
     techStack: [
       { name: "AWS S3", Icon: Database },
       { name: "AWS Lambda", Icon: Zap },
       { name: "API Gateway", Icon: Network },
+      { name: "DynamoDB", Icon: Database },
       { name: "Terraform", Icon: Wrench },
       { name: "GitHub Actions", Icon: GitCommit },
       { name: "CloudFront", Icon: Network },
-      { name: "DynamoDB", Icon: Database },
       { name: "Python", Icon: CodeXml },
       { name: "CloudWatch", Icon: Activity },
     ],
     Icon: Briefcase,
   },
+];
+
+// ==============================
+// INDUSTRIES & SERVICES
+// ==============================
+
+export interface IndustryCard {
+  id: string;
+  name: string;
+  description: string;
+  Icon: LucideIcon;
+  examples: string[];
+}
+
+export const INDUSTRIES_DATA: IndustryCard[] = [
   {
-    id: "notes-app",
-    title: "Notes App (MERN)",
-    description: "A secure and intuitive MERN stack application for creating, organizing, and managing personal notes. Features JWT-based authentication, protected routes, and complete CRUD operations for effective note management.",
-    liveDemoUrl: "https://notes-application-2-vv1k.onrender.com/",
-    githubRepoUrl: "https://github.com/MERNDevTinkal/Notes-Application",
-    techStack: [
-      { name: "React", Icon: CodeXml },
-      { name: "Express.js", Icon: ServerCog },
-      { name: "MongoDB", Icon: Database },
-      { name: "Node.js", Icon: ServerCog },
-    ],
-    Icon: FileText,
+    id: "healthcare",
+    name: "Healthcare Software",
+    description: "Digital healthcare platforms, patient workflows, provider systems, and healthcare operations.",
+    Icon: Building,
+    examples: ["Digital Workflows", "Patient Management", "Provider Systems", "Healthcare APIs"],
   },
   {
-    id: "e-commerce",
-    title: "E-commerce Frontend (Redux)",
-    description: "A dynamic online shopping experience with product listings, cart functionality, and efficient global state management using Redux Toolkit, styled with Tailwind CSS for a modern, responsive UI.",
-    liveDemoUrl: "https://ecommerce-using-redux-alpha.vercel.app/",
-    githubRepoUrl: "https://github.com/MERNDevTinkal/Ecommerce-Using-Redux",
-    techStack: [
-      { name: "React", Icon: CodeXml },
-      { name: "Redux Toolkit", Icon: CodeXml },
-      { name: "Tailwind CSS", Icon: Palette },
-      { name: "JavaScript", Icon: CodeXml },
-    ],
-    Icon: ShoppingCart,
+    id: "veterinary",
+    name: "Veterinary Software",
+    description: "Veterinary practice management, appointment scheduling, communication systems, and telehealth.",
+    Icon: Building,
+    examples: ["Practice Management", "Appointment Systems", "Telemedicine", "Real-time Communication"],
+  },
+  {
+    id: "lms",
+    name: "Learning Management Systems",
+    description: "Educational platforms, course management, user progress tracking, and content delivery.",
+    Icon: GraduationCap,
+    examples: ["Course Management", "User Roles", "Progress Tracking", "Content Delivery"],
+  },
+  {
+    id: "hospital",
+    name: "Hospital Management",
+    description: "Hospital operations, workflow management, staff coordination, and patient systems.",
+    Icon: Building,
+    examples: ["Workflow Automation", "Staff Management", "Patient Records", "Operations"],
+  },
+  {
+    id: "crm",
+    name: "CRM Software",
+    description: "Customer relationship management, lead tracking, communication, and sales workflows.",
+    Icon: Briefcase,
+    examples: ["Lead Management", "Customer Communication", "Sales Pipeline", "Reporting"],
+  },
+  {
+    id: "events",
+    name: "Event Management",
+    description: "Event platforms, registration systems, scheduling, and attendee management.",
+    Icon: Briefcase,
+    examples: ["Event Creation", "Registration", "Scheduling", "Attendee Management"],
+  },
+  {
+    id: "hospitality",
+    name: "Hospitality Software",
+    description: "Hotel management, booking systems, guest management, and operations automation.",
+    Icon: Building,
+    examples: ["Booking Systems", "Guest Management", "Operations", "Revenue Management"],
+  },
+  {
+    id: "dating",
+    name: "Dating Platforms",
+    description: "User matching, real-time messaging, calling features, and community systems.",
+    Icon: Briefcase,
+    examples: ["Profile Management", "Real-time Messaging", "Calling", "Notifications"],
+  },
+  {
+    id: "webinar",
+    name: "Webinar Platforms",
+    description: "Live streaming, interactive sessions, recording, chat, and attendee management.",
+    Icon: Briefcase,
+    examples: ["Live Sessions", "Chat Systems", "Recording", "Real-time Broadcasting"],
+  },
+  {
+    id: "wellness",
+    name: "Wellness & Music Tech",
+    description: "Wellness platforms, music streaming, curated experiences, and immersive applications.",
+    Icon: Briefcase,
+    examples: ["Music Streaming", "Curated Content", "User Experiences", "Wellness Features"],
+  },
+];
+
+export interface ServiceCard {
+  id: string;
+  name: string;
+  description: string;
+  Icon: LucideIcon;
+}
+
+export const SERVICES_DATA: ServiceCard[] = [
+  {
+    id: "full-stack",
+    name: "Full Stack Web Applications",
+    description: "End-to-end web applications from frontend UI to backend APIs with database design.",
+    Icon: CodeXml,
+  },
+  {
+    id: "mern",
+    name: "MERN Stack Development",
+    description: "MongoDB, Express.js, React.js, and Node.js applications with TypeScript and modern tooling.",
+    Icon: CodeXml,
+  },
+  {
+    id: "react",
+    name: "React & Next.js Frontends",
+    description: "Interactive user interfaces, server-side rendering, static generation, and optimization.",
+    Icon: CodeXml,
+  },
+  {
+    id: "apis",
+    name: "Node.js & Express APIs",
+    description: "RESTful API design, microservices, authentication, authorization, and backend systems.",
+    Icon: ServerCog,
+  },
+  {
+    id: "realtime",
+    name: "Real-Time Communication",
+    description: "WebSocket implementation, live notifications, real-time chat, and collaborative features.",
+    Icon: Zap,
+  },
+  {
+    id: "calling",
+    name: "Video Calling & Webinars",
+    description: "Voice and video calling integration, webinar platforms, recording, and streaming systems.",
+    Icon: Phone,
+  },
+  {
+    id: "integrations",
+    name: "Third-Party Integrations",
+    description: "Payment gateways, email services, SMS, analytics, and external API integrations.",
+    Icon: Network,
+  },
+  {
+    id: "aws",
+    name: "AWS & Cloud Deployment",
+    description: "S3, Lambda, EC2, RDS deployment, cloud architecture, and serverless solutions.",
+    Icon: Database,
+  },
+  {
+    id: "dashboards",
+    name: "Admin Dashboards",
+    description: "Management panels, analytics dashboards, user administration, and operational tools.",
+    Icon: BarChart3,
+  },
+  {
+    id: "databases",
+    name: "Database Design & Optimization",
+    description: "MongoDB, PostgreSQL, MySQL schema design, indexing, and performance optimization.",
+    Icon: Database,
+  },
+  {
+    id: "maintenance",
+    name: "Production Maintenance",
+    description: "Bug fixes, performance optimization, refactoring, and existing codebase improvements.",
+    Icon: Wrench,
+  },
+  {
+    id: "saas",
+    name: "SaaS Applications",
+    description: "Multi-tenant applications, subscription systems, licensing, and scalable infrastructure.",
+    Icon: Layers,
   },
 ];
 

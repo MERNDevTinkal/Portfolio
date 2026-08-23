@@ -26,17 +26,21 @@ const siteUrl = "https://tinkal-engineer-portfolio.vercel.app";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${AUTHOR_NAME} | Full Stack Developer & AI Engineer`,
+    default: `${AUTHOR_NAME} | MERN Stack Developer | Node.js, React & Next.js`,
     template: `%s | ${AUTHOR_NAME}`,
   },
-  description: `Explore the portfolio of ${AUTHOR_NAME}, a passionate and skilled Full Stack Developer specializing in MERN stack, Next.js, TypeScript, and AI integration.`,
+  description: `MERN Stack Developer specializing in React, Next.js, Node.js, TypeScript, backend APIs, real-time applications, AWS integrations, and production software. Available for freelance projects.`,
   keywords: [
     "Tinkal Kumar",
-    "Full Stack Developer",
-    "MERN Stack",
+    "MERN Stack Developer",
+    "React Developer",
     "Next.js Developer",
-    "Software Engineer",
-    "AI Integration",
+    "Node.js Engineer",
+    "Full Stack Developer",
+    "TypeScript Developer",
+    "Backend API Development",
+    "Web Application Development",
+    "Freelance Developer",
     "Portfolio"
   ],
   authors: [{ name: AUTHOR_NAME, url: SOCIAL_LINKS.find(l => l.name === "LinkedIn")?.href }],
@@ -47,8 +51,8 @@ export const metadata: Metadata = {
     apple: LOGO_PATH,
   },
   openGraph: {
-    title: `${AUTHOR_NAME} - Full Stack Developer Portfolio`,
-    description: `Discover ${AUTHOR_NAME}'s projects and skills in MERN stack, Next.js, and more.`,
+    title: `${AUTHOR_NAME} - MERN Stack Developer | Production Web Applications`,
+    description: `MERN Stack Developer specializing in React, Next.js, Node.js, TypeScript, backend APIs, real-time applications, AWS integrations, and production software.`,
     url: siteUrl,
     siteName: `${AUTHOR_NAME}'s Portfolio`,
     images: [
@@ -71,8 +75,8 @@ const personStructuredData = {
   "url": siteUrl,
   "image": `${siteUrl}/profile-1.jpg`, 
   "sameAs": SOCIAL_LINKS.map(link => link.href),
-  "jobTitle": "Full Stack Developer",
-  "knowsAbout": ["MERN Stack", "Next.js", "AI Integration", "TypeScript"],
+  "jobTitle": "MERN Stack Developer | Full Stack Engineer",
+  "knowsAbout": ["MERN Stack", "React", "Next.js", "Node.js", "TypeScript", "Backend APIs", "Real-time Applications", "AWS"],
   "email": `mailto:${AUTHOR_EMAIL}`,
 };
 

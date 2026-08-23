@@ -136,7 +136,7 @@ export function Hero() {
               variants={textItemVariants}
               className="text-lg text-muted-foreground max-w-xl mx-auto md:mx-0 leading-relaxed"
             >
-              A Senior Full Stack Engineer crafting enterprise-grade software with modern technologies. Passionate about system reliability, seamless user experiences, and scalable architecture.
+              MERN Stack Developer specializing in building production-ready web applications. I develop scalable, high-performance systems using React, Next.js, Node.js, and TypeScript. Available for freelance projects on Upwork and custom software development.
             </motion.p>
           </div>
 
@@ -145,15 +145,15 @@ export function Hero() {
             className="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4 mb-10"
           >
             <Button size="lg" asChild className="premium-shadow rounded-full px-8 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-primary/50">
-              <Link href={RESUME_PATH} download>
-                <FileText className="mr-2 h-5 w-5 inline" />
-                View Resume
+              <Link href="#contact">
+                Let&apos;s Work Together
+                <ArrowRight className="ml-2 h-5 w-5 inline" />
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild className="glass rounded-full px-8 hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300 ease-in-out transform hover:scale-105">
-              <Link href="#contact">
-                Contact Me
-                <ArrowRight className="ml-2 h-5 w-5 inline" />
+              <Link href="#projects">
+                <FileText className="mr-2 h-5 w-5 inline" />
+                View My Work
               </Link>
             </Button>
           </motion.div>

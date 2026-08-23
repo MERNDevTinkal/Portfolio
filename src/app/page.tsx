@@ -3,9 +3,10 @@
 
 import { motion } from "framer-motion";
 import { Hero } from "@/components/sections/Hero";
-import { About } from "@/components/sections/About";
 import { Projects } from "@/components/sections/Projects";
-import Blogs from "@/components/sections/Blogs";
+import { Industries } from "@/components/sections/Industries";
+import { Services } from "@/components/sections/Services";
+import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
 // Removed import for DemoLocalStorageSetter
 
@@ -24,9 +25,10 @@ export default function HomePage() {
 
   const sections = [
     <Hero key="hero" />,
-    <About key="about" />,
     <Projects key="projects" />,
-    <Blogs key="blogs" />,
+    <Industries key="industries" />,
+    <Services key="services" />,
+    <About key="about" />,
     <Contact key="contact" />,
   ];
 
