@@ -5,3 +5,4 @@ config();
 import '@/ai/flows/generate-blog-titles.ts';
 import '@/ai/flows/portfolio-chat-flow.ts';
 import '@/ai/flows/generate-blog-content-flow.ts';
+import '@/ai/flows/groq-chat-flow.ts';

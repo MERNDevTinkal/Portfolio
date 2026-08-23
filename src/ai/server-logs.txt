@@ -1,1 +1,55 @@
-no logs
+[2026-08-23T12:41:25.020Z] [System] Log cleared (5-hour interval reached)
+--------------------------------------------------
+[2026-08-23T12:41:25.020Z] [Sora Native Groq Request]
+{
+  "userInput": "hi",
+  "historyLength": 2
+}
+--------------------------------------------------
+[2026-08-23T12:41:25.133Z] [Sora Native Groq Error]
+{
+  "message": "404 {\"error\":{\"message\":\"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}",
+  "stack": "Error: 404 {\"error\":{\"message\":\"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n    at APIError.generate (D:\\All Software\\portfolio\\.next\\server\\chunks\\ssr\\node_modules_4f3b134f._.js:10512:20)\n    at Groq.makeStatusError (D:\\All Software\\portfolio\\.next\\server\\chunks\\ssr\\node_modules_4f3b134f._.js:11368:162)\n    at Groq.makeRequest (D:\\All Software\\portfolio\\.next\\server\\chunks\\ssr\\node_modules_4f3b134f._.js:11419:30)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async getPortfolioChatResponse (D:\\All Software\\portfolio\\.next\\server\\chunks\\ssr\\[root of the server]__85fbc625._.js:408:28)\n    at async D:\\All Software\\portfolio\\node_modules\\next\\dist\\compiled\\next-server\\app-page.runtime.dev.js:439:1227\n    at async handleAction (D:\\All Software\\portfolio\\node_modules\\next\\dist\\compiled\\next-server\\app-page.runtime.dev.js:437:23681)\n    at async renderToHTMLOrFlightImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\compiled\\next-server\\app-page.runtime.dev.js:444:26714)\n    at async doRender (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:1650:34)\n    at async DevServer.renderToResponseWithComponentsImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:1915:28)\n    at async DevServer.renderPageComponent (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:2393:24)\n    at async DevServer.renderToResponseImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:2430:32)\n    at async DevServer.pipeImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:1003:25)\n    at async NextNodeServer.handleCatchallRenderRequest (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\next-server.js:304:17)\n    at async DevServer.handleRequestImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:895:17)\n    at async D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js:371:20\n    at async Span.traceAsyncFn (D:\\All Software\\portfolio\\node_modules\\next\\dist\\trace\\trace.js:157:20)\n    at async DevServer.handleRequest (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js:368:24)\n    at async invokeRender (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\lib\\router-server.js:235:21)\n    at async handleRequest (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\lib\\router-server.js:426:24)\n    at async requestHandlerImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\lib\\router-server.js:450:13)\n    at async Server.requestListener (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\lib\\start-server.js:158:13)"
+}
+--------------------------------------------------
+[2026-08-23T12:48:23.061Z] [Sora Native Groq Request]
+{
+  "userInput": "hi",
+  "historyLength": 2
+}
+--------------------------------------------------
+[2026-08-23T12:48:23.333Z] [Sora Native Groq Error]
+{
+  "message": "404 {\"error\":{\"message\":\"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}",
+  "stack": "Error: 404 {\"error\":{\"message\":\"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n    at APIError.generate (D:\\All Software\\portfolio\\.next\\server\\chunks\\ssr\\node_modules_4f3b134f._.js:10512:20)\n    at Groq.makeStatusError (D:\\All Software\\portfolio\\.next\\server\\chunks\\ssr\\node_modules_4f3b134f._.js:11368:162)\n    at Groq.makeRequest (D:\\All Software\\portfolio\\.next\\server\\chunks\\ssr\\node_modules_4f3b134f._.js:11419:30)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async getPortfolioChatResponse (D:\\All Software\\portfolio\\.next\\server\\chunks\\ssr\\[root of the server]__85fbc625._.js:408:28)\n    at async D:\\All Software\\portfolio\\node_modules\\next\\dist\\compiled\\next-server\\app-page.runtime.dev.js:439:1227\n    at async handleAction (D:\\All Software\\portfolio\\node_modules\\next\\dist\\compiled\\next-server\\app-page.runtime.dev.js:437:23681)\n    at async renderToHTMLOrFlightImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\compiled\\next-server\\app-page.runtime.dev.js:444:26714)\n    at async doRender (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:1650:34)\n    at async DevServer.renderToResponseWithComponentsImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:1915:28)\n    at async DevServer.renderPageComponent (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:2393:24)\n    at async DevServer.renderToResponseImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:2430:32)\n    at async DevServer.pipeImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:1003:25)\n    at async NextNodeServer.handleCatchallRenderRequest (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\next-server.js:304:17)\n    at async DevServer.handleRequestImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:895:17)\n    at async D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js:371:20\n    at async Span.traceAsyncFn (D:\\All Software\\portfolio\\node_modules\\next\\dist\\trace\\trace.js:157:20)\n    at async DevServer.handleRequest (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js:368:24)\n    at async invokeRender (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\lib\\router-server.js:235:21)\n    at async handleRequest (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\lib\\router-server.js:426:24)\n    at async requestHandlerImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\lib\\router-server.js:450:13)\n    at async Server.requestListener (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\lib\\start-server.js:158:13)"
+}
+--------------------------------------------------
+[2026-08-23T12:53:31.256Z] [Sora Native Groq Request]
+{
+  "userInput": "hi",
+  "historyLength": 2
+}
+--------------------------------------------------
+[2026-08-23T12:53:31.593Z] [Sora Native Groq Error]
+{
+  "message": "404 {\"error\":{\"message\":\"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}",
+  "stack": "Error: 404 {\"error\":{\"message\":\"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n    at APIError.generate (D:\\All Software\\portfolio\\.next\\server\\chunks\\ssr\\node_modules_4f3b134f._.js:10512:20)\n    at Groq.makeStatusError (D:\\All Software\\portfolio\\.next\\server\\chunks\\ssr\\node_modules_4f3b134f._.js:11368:162)\n    at Groq.makeRequest (D:\\All Software\\portfolio\\.next\\server\\chunks\\ssr\\node_modules_4f3b134f._.js:11419:30)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async getPortfolioChatResponse (D:\\All Software\\portfolio\\.next\\server\\chunks\\ssr\\[root of the server]__85fbc625._.js:408:28)\n    at async D:\\All Software\\portfolio\\node_modules\\next\\dist\\compiled\\next-server\\app-page.runtime.dev.js:439:1227\n    at async handleAction (D:\\All Software\\portfolio\\node_modules\\next\\dist\\compiled\\next-server\\app-page.runtime.dev.js:437:23681)\n    at async renderToHTMLOrFlightImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\compiled\\next-server\\app-page.runtime.dev.js:444:26714)\n    at async doRender (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:1650:34)\n    at async DevServer.renderToResponseWithComponentsImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:1915:28)\n    at async DevServer.renderPageComponent (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:2393:24)\n    at async DevServer.renderToResponseImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:2430:32)\n    at async DevServer.pipeImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:1003:25)\n    at async NextNodeServer.handleCatchallRenderRequest (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\next-server.js:304:17)\n    at async DevServer.handleRequestImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\base-server.js:895:17)\n    at async D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js:371:20\n    at async Span.traceAsyncFn (D:\\All Software\\portfolio\\node_modules\\next\\dist\\trace\\trace.js:157:20)\n    at async DevServer.handleRequest (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js:368:24)\n    at async invokeRender (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\lib\\router-server.js:235:21)\n    at async handleRequest (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\lib\\router-server.js:426:24)\n    at async requestHandlerImpl (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\lib\\router-server.js:450:13)\n    at async Server.requestListener (D:\\All Software\\portfolio\\node_modules\\next\\dist\\server\\lib\\start-server.js:158:13)"
+}
+--------------------------------------------------
+[2026-08-23T12:55:06.724Z] [Sora Native Groq Request]
+{
+  "userInput": "hi",
+  "historyLength": 2
+}
+--------------------------------------------------
+[2026-08-23T12:55:07.852Z] [Sora Native Groq Success]
+{
+  "response": "Hello! How can I assist you today?",
+  "suggestedFollowUps": [
+    "Tell me about Tinkal's full‑stack experience",
+    "What AWS projects has Tinkal worked on?",
+    "Can you share details of the DocVault Pro project?",
+    "How can I get in touch with Tinkal for a collaboration?"
+  ]
+}
+--------------------------------------------------
