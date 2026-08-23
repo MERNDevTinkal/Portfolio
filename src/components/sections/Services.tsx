@@ -45,7 +45,7 @@ export function Services() {
           const IconComponent = service.Icon;
           return (
             <motion.div key={service.id} variants={itemVariants}>
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300 bg-card border border-border group">
+              <Card className="h-full hover:shadow-xl hover:border-primary/50 transition-all duration-300 bg-card border border-border/80 group">
                 <CardHeader>
                   <div className="flex items-start justify-between mb-2">
                     <CardTitle className="text-lg font-semibold text-primary group-hover:text-accent transition-colors">

@@ -55,8 +55,8 @@ export function Navbar() {
   };
 
   const mobileMenuVariants = {
-    closed: { opacity: 0, y: "-100%" },
-    open: { opacity: 1, y: "0%" },
+    closed: { opacity: 0, scale: 0.95, y: -10 },
+    open: { opacity: 1, scale: 1, y: 0 },
   };
 
   return (
@@ -64,15 +64,16 @@ export function Navbar() {
       initial={{ y: -100 }}
       animate={{
         y: 0,
-        backgroundColor: isScrolled ? "hsl(var(--card) / 0.8)" : "hsl(var(--background) / 0.3)",
-        backdropFilter: isScrolled ? "blur(12px)" : "blur(4px)",
-        boxShadow: isScrolled ? "0 4px 30px rgba(0, 0, 0, 0.1)" : "none",
-        borderColor: isScrolled ? "hsl(var(--border) / 0.3)" : "transparent",
+        backgroundColor: isScrolled ? "hsl(var(--card) / 0.85)" : "hsl(var(--background) / 0.3)",
+        backdropFilter: isScrolled ? "blur(16px)" : "blur(4px)",
+        boxShadow: isScrolled ? "0 4px 30px rgba(0, 0, 0, 0.15)" : "none",
+        borderColor: isScrolled ? "hsl(var(--border) / 0.4)" : "transparent",
       }}
       transition={{ duration: 0.5, type: "spring", stiffness: 200, damping: 20 }}
       className={`fixed left-0 right-0 z-50 mx-auto w-full transition-all duration-300 ${
-        isScrolled ? 'top-2 sm:top-4 max-w-5xl rounded-full border' : 'top-0'
+        isScrolled ? 'top-2 sm:top-4 max-w-5xl rounded-full border px-2 sm:px-0' : 'top-0'
       }`}
+      style={{ transform: 'translateZ(0)' }}
     >
       <div className={`container mx-auto flex items-center justify-between px-4 md:px-6 transition-all duration-300 ${isScrolled ? 'h-16' : 'h-20'}`}>
         <Link href="#home" className="flex items-center space-x-3 text-2xl font-bold font-headline text-primary" onClick={(e) => { e.preventDefault(); handleNavClick("#home");}}>
@@ -126,21 +127,27 @@ export function Navbar() {
             initial="closed"
             animate="open"
             exit="closed"
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="absolute top-20 left-0 right-0 bg-card shadow-lg md:hidden"
+            transition={{ type: "spring", stiffness: 350, damping: 25 }}
+            className={`absolute top-full left-0 right-0 md:hidden overflow-hidden transition-all duration-300 ${
+              isScrolled 
+                ? 'mt-2 mx-3 rounded-2xl border border-border/60 bg-card/95 backdrop-blur-xl shadow-2xl' 
+                : 'border-b border-border/40 bg-card/95 backdrop-blur-xl shadow-xl'
+            }`}
           >
             <div className="flex flex-col items-center space-y-4 p-6">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-lg text-foreground hover:text-primary transition-colors duration-300 ease-in-out"
+                  className="text-lg font-medium text-foreground hover:text-primary transition-colors duration-300 ease-in-out"
                   onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                 >
                   <span>{link.name}</span>
                 </Link>
               ))}
-              <ThemeToggle />
+              <div className="pt-2 border-t border-border/40 w-full flex justify-center">
+                <ThemeToggle />
+              </div>
             </div>
           </motion.div>
         )}

@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth scrolling and animations globally */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize animations for 60fps */
 @layer base {
   :root {
     --background: 0 0% 100%; /* Pure White */
@@ -87,9 +95,20 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-inter), sans-serif;
+    /* GPU acceleration for smooth animations */
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-headline;
+  }
+  /* Mobile-optimized tap behavior */
+  button, [role="button"], a {
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* Smooth transitions by default */
+  button, input, textarea, select {
+    @apply transition-colors duration-200;
   }
 }
 
@@ -130,6 +149,9 @@
       );
     filter: blur(60px);
     animation: aurora-shift 15s ease-in-out infinite alternate;
+    /* GPU acceleration */
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   @keyframes aurora-shift {
@@ -150,5 +172,29 @@
 
   .dark .premium-shadow {
     box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5), 0 0 20px -5px rgba(0,0,0,0.2);
+  }
+
+  /* Mobile-first responsive typography */
+  @media (max-width: 640px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Smooth color transitions for theme switching */
+  .dark {
+    color-scheme: dark;
+  }
+  light {
+    color-scheme: light;
+  }
+
+  /* Performance optimization */
+  .glass, .glass-card {
+    will-change: backdrop-filter;
   }
 }

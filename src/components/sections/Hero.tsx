@@ -116,9 +116,9 @@ export function Hero() {
 
             <motion.div
               variants={textItemVariants}
-              className="text-2xl sm:text-3xl md:text-4xl font-medium h-20 md:h-12 text-foreground/80"
+              className="text-2xl sm:text-3xl md:text-4xl font-medium min-h-[4.5rem] md:min-h-[3rem] h-auto text-foreground/80 flex items-center justify-center md:justify-start flex-wrap"
             >
-              I build{" "}
+              <span className="mr-2">I build</span>
               <span className="font-semibold text-accent dark:text-accent">
                 <Typewriter
                   words={HERO_TITLES}
@@ -142,16 +142,16 @@ export function Hero() {
 
           <motion.div
             variants={textItemVariants}
-            className="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4 mb-10"
+            className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 mb-10 w-full"
           >
-            <Button size="lg" asChild className="premium-shadow rounded-full px-8 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-primary/50">
-              <Link href="#contact">
+            <Button size="lg" asChild className="w-full sm:w-auto premium-shadow rounded-full px-8 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-primary/50">
+              <Link href="#contact" className="w-full justify-center flex items-center">
                 Let&apos;s Work Together
                 <ArrowRight className="ml-2 h-5 w-5 inline" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild className="glass rounded-full px-8 hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300 ease-in-out transform hover:scale-105">
-              <Link href="#projects">
+            <Button size="lg" variant="outline" asChild className="w-full sm:w-auto glass rounded-full px-8 hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300 ease-in-out transform hover:scale-105">
+              <Link href="#projects" className="w-full justify-center flex items-center">
                 <FileText className="mr-2 h-5 w-5 inline" />
                 View My Work
               </Link>

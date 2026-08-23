@@ -13,6 +13,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { CONTACT_DETAILS, EMAILJS_CONFIG, SOCIAL_LINKS, AUTHOR_EMAIL, AUTHOR_NAME, CONTACT_FORM_RECEIVER_EMAIL } from "@/lib/data";
 import Link from "next/link";
@@ -21,7 +28,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Invalid email address." }),
-  phone: z.string().optional(),
+  company: z.string().optional(),
+  projectType: z.string().optional(),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
 });
 
@@ -30,7 +38,8 @@ type ContactFormValues = z.infer<typeof contactFormSchema>;
 const LOCALSTORAGE_KEYS = {
   NAME: 'contactFormDraft_name',
   EMAIL: 'contactFormDraft_email',
-  PHONE: 'contactFormDraft_phone',
+  COMPANY: 'contactFormDraft_company',
+  PROJECTTYPE: 'contactFormDraft_projectType',
   MESSAGE: 'contactFormDraft_message',
 };
 
@@ -50,7 +59,8 @@ export function Contact() {
     defaultValues: {
       name: '',
       email: '',
-      phone: '',
+      company: '',
+      projectType: '',
       message: '',
     }
   });
@@ -64,12 +74,14 @@ export function Contact() {
     if (isMounted && typeof window !== 'undefined') {
       const savedName = localStorage.getItem(LOCALSTORAGE_KEYS.NAME);
       const savedEmail = localStorage.getItem(LOCALSTORAGE_KEYS.EMAIL);
-      const savedPhone = localStorage.getItem(LOCALSTORAGE_KEYS.PHONE);
+      const savedCompany = localStorage.getItem(LOCALSTORAGE_KEYS.COMPANY);
+      const savedProjectType = localStorage.getItem(LOCALSTORAGE_KEYS.PROJECTTYPE);
       const savedMessage = localStorage.getItem(LOCALSTORAGE_KEYS.MESSAGE);
 
       if (savedName) setValue('name', savedName);
       if (savedEmail) setValue('email', savedEmail);
-      if (savedPhone) setValue('phone', savedPhone);
+      if (savedCompany) setValue('company', savedCompany);
+      if (savedProjectType) setValue('projectType', savedProjectType);
       if (savedMessage) setValue('message', savedMessage);
     }
   }, [setValue, isMounted]);
@@ -112,21 +124,23 @@ export function Contact() {
           to_name: AUTHOR_NAME,
           from_email: data.email,
           to_email: CONTACT_FORM_RECEIVER_EMAIL,
-          phone_number: data.phone || "Not provided",
+          company: data.company || "Not provided",
+          project_type: data.projectType || "Not specified",
           message: data.message,
         },
         EMAILJS_CONFIG.publicKey
       );
       toast({
         title: "Message Sent Successfully! ✨",
-        description: `Thank you for reaching out, ${data.name}! Your message has been delivered to Tinkal. He'll be in touch soon.`,
+        description: `Thank you for reaching out, ${data.name}! Your project details have been received. I'll review them and get back to you soon.`,
         variant: "default",
       });
-      reset({ name: '', email: '', phone: '', message: '' });
+      reset({ name: '', email: '', company: '', projectType: '', message: '' });
       if (typeof window !== 'undefined') {
         localStorage.removeItem(LOCALSTORAGE_KEYS.NAME);
         localStorage.removeItem(LOCALSTORAGE_KEYS.EMAIL);
-        localStorage.removeItem(LOCALSTORAGE_KEYS.PHONE);
+        localStorage.removeItem(LOCALSTORAGE_KEYS.COMPANY);
+        localStorage.removeItem(LOCALSTORAGE_KEYS.PROJECTTYPE);
         localStorage.removeItem(LOCALSTORAGE_KEYS.MESSAGE);
       }
     } catch (error) {
@@ -168,34 +182,58 @@ export function Contact() {
   const renderContactForm = () => (
      <motion.form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-6 p-6 sm:p-8 bg-card rounded-lg shadow-xl"
+        className="space-y-6 p-4 sm:p-6 md:p-8 bg-card rounded-lg shadow-xl"
         initial={{ opacity: 0, x: 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.4 }}
+        style={{ transform: 'translateZ(0)' }}
       >
         <div>
           <Label htmlFor="name" className="text-sm font-medium">Full Name</Label>
-          <Input id="name" {...register("name")} placeholder={"Your Full Name"} className="mt-1" />
+          <Input id="name" {...register("name")} placeholder={"Your Full Name"} className="mt-1 h-11 sm:h-10 text-base sm:text-sm" />
           {errors.name && <p className="mt-1 text-xs text-destructive">{errors.name.message}</p>}
         </div>
         <div>
           <Label htmlFor="email" className="text-sm font-medium">Email Address</Label>
-          <Input id="email" type="email" {...register("email")} placeholder={`your.email@example.com`} className="mt-1" />
+          <Input id="email" type="email" {...register("email")} placeholder={`your.email@example.com`} className="mt-1 h-11 sm:h-10 text-base sm:text-sm" />
           {errors.email && <p className="mt-1 text-xs text-destructive">{errors.email.message}</p>}
         </div>
         <div>
-          <Label htmlFor="phone" className="text-sm font-medium">Phone Number (Optional)</Label>
-          <Input id="phone" type="tel" {...register("phone")} placeholder="+91 123 456 7890" className="mt-1" />
-          {errors.phone && <p className="mt-1 text-xs text-destructive">{errors.phone.message}</p>}
+          <Label htmlFor="company" className="text-sm font-medium">Company / Organization (Optional)</Label>
+          <Input id="company" {...register("company")} placeholder="Your company name" className="mt-1 h-11 sm:h-10 text-base sm:text-sm" />
+          {errors.company && <p className="mt-1 text-xs text-destructive">{errors.company.message}</p>}
         </div>
         <div>
-          <Label htmlFor="message" className="text-sm font-medium">Message</Label>
-          <Textarea id="message" {...register("message")} placeholder="Your message here..." rows={5} className="mt-1" />
+          <Label htmlFor="projectType" className="text-sm font-medium">Project Type (Optional)</Label>
+          <Select onValueChange={(value) => setValue("projectType", value)} defaultValue="">
+            <SelectTrigger id="projectType" className="mt-1 h-11 sm:h-10">
+              <SelectValue placeholder="Select a project type..." />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="custom-web-app">Custom Web Application</SelectItem>
+              <SelectItem value="saas">SaaS Application</SelectItem>
+              <SelectItem value="mern">MERN Stack Development</SelectItem>
+              <SelectItem value="react-next">React / Next.js Development</SelectItem>
+              <SelectItem value="nodejs">Node.js Backend</SelectItem>
+              <SelectItem value="api">API Development & Integration</SelectItem>
+              <SelectItem value="healthcare">Healthcare Software</SelectItem>
+              <SelectItem value="crm">CRM Development</SelectItem>
+              <SelectItem value="lms">LMS Development</SelectItem>
+              <SelectItem value="realtime">Real-Time / Video Application</SelectItem>
+              <SelectItem value="maintenance">Bug Fixing & Maintenance</SelectItem>
+              <SelectItem value="other">Other</SelectItem>
+            </SelectContent>
+          </Select>
+          {errors.projectType && <p className="mt-1 text-xs text-destructive">{errors.projectType.message}</p>}
+        </div>
+        <div>
+          <Label htmlFor="message" className="text-sm font-medium">Project Details</Label>
+          <Textarea id="message" {...register("message")} placeholder="Tell me about your project, requirements, and goals..." rows={5} className="mt-1 text-base sm:text-sm resize-none" />
           {errors.message && <p className="mt-1 text-xs text-destructive">{errors.message.message}</p>}
         </div>
-        <Button type="submit" disabled={isSubmitting} className="w-full shadow-md transform hover:scale-105">
-          {isSubmitting ? "Sending..." : "Send Message"}
+        <Button type="submit" disabled={isSubmitting} className="w-full shadow-md transform hover:scale-105 h-11 sm:h-10 text-base sm:text-sm">
+          {isSubmitting ? "Sending..." : "Discuss Your Project"}
         </Button>
          {(EMAILJS_CONFIG.serviceId.includes("YOUR_") || EMAILJS_CONFIG.templateId.includes("YOUR_") || EMAILJS_CONFIG.publicKey.includes("YOUR_") || (process.env.NEXT_PUBLIC_CONTACT_FORM_RECEIVER_EMAIL && process.env.NEXT_PUBLIC_CONTACT_FORM_RECEIVER_EMAIL.includes("YOUR_")) ) && (
           <p className="mt-2 text-xs text-amber-600 dark:text-amber-400 text-center">
@@ -207,6 +245,10 @@ export function Contact() {
 
   const renderFormSkeleton = () => (
     <div className="space-y-6 p-6 sm:p-8 bg-card rounded-lg shadow-xl">
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-1/4" />
+        <Skeleton className="h-10 w-full" />
+      </div>
       <div className="space-y-2">
         <Skeleton className="h-4 w-1/4" />
         <Skeleton className="h-10 w-full" />

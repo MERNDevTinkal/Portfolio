@@ -45,13 +45,13 @@ export function Industries() {
           const IconComponent = industry.Icon;
           return (
             <motion.div key={industry.id} variants={itemVariants}>
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300 bg-card border border-border">
+              <Card className="h-full hover:shadow-xl hover:border-primary/50 transition-all duration-300 bg-card border border-border/80 group">
                 <CardHeader>
                   <div className="flex items-start justify-between mb-2">
-                    <CardTitle className="text-xl font-semibold text-primary">
+                    <CardTitle className="text-xl font-semibold text-primary group-hover:text-accent transition-colors">
                       {industry.name}
                     </CardTitle>
-                    <IconComponent className="h-5 w-5 text-accent flex-shrink-0" />
+                    <IconComponent className="h-5 w-5 text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -62,7 +62,7 @@ export function Industries() {
                     {industry.examples.map((example, idx) => (
                       <span
                         key={idx}
-                        className="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary font-medium"
+                        className="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground font-medium"
                       >
                         {example}
                       </span>
