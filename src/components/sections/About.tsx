@@ -39,9 +39,9 @@ export function About() {
   }, {});
 
   return (
-    <SectionWrapper id="about">
+    <SectionWrapper id="about" className="overflow-hidden w-full max-w-full">
       <SectionHeader title="About Me" Icon={UserCircle2} />
-      <div className="grid md:grid-cols-5 gap-12 items-start mb-16">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-start mb-16">
         <motion.div
           className="md:col-span-2 space-y-6"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -54,13 +54,13 @@ export function About() {
             alt={ABOUT_ME.image.alt}
             width={500}
             height={300} 
-            className="rounded-lg shadow-xl w-full h-auto"
+            className="rounded-lg shadow-xl w-full h-auto max-w-full"
             data-ai-hint={ABOUT_ME.image.dataAiHint}
             priority
           />
         </motion.div>
         <motion.div
-          className="md:col-span-3 space-y-6"
+          className="md:col-span-3 space-y-6 break-words"
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
