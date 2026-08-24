@@ -1,8 +1,8 @@
-
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Send, Loader2, X, MessageSquarePlus, ChevronDown, ChevronUp, Trash2, Copy, CheckCircle2, Bot } from "lucide-react";
+import { createPortal } from "react-dom";
+import { Send, Loader2, X, MessageSquarePlus, ChevronDown, ChevronUp, Trash2, Bot, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -39,7 +39,7 @@ const LOCAL_STORAGE_KEY = 'portfolioChatHistory_Sora_v3';
 const initialBotMessage: Message = {
   id: "initial-bot-message-sora",
   sender: "bot",
-  text: `Hello! I'm Sora, Tinkal's personal AI assistant. Ask me about his skills, projects, experience, or how to get in touch! You can also use the suggestions.`,
+  text: `Hello! I'm Sora, Tinkal's personal AI assistant. Ask me about his skills, projects, experience, or how to get in touch!`,
   suggestions: INITIAL_SUGGESTIONS.slice(0, 4),
 };
 
@@ -50,7 +50,8 @@ export function ChatbotDialog() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentSuggestions, setCurrentSuggestions] = useState<string[]>([]);
   const [suggestionsExpanded, setSuggestionsExpanded] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(true);
+  const [mounted, setMounted] = useState(false);
   
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -59,43 +60,36 @@ export function ChatbotDialog() {
   const { toast } = useToast();
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
+    setMounted(true);
+  }, []);
+
+  // NEVER set overflow = hidden to ensure full non-blocking page scrolling while chat is open
 
   useEffect(() => {
-    if (isOpen) {
-      if (typeof window !== 'undefined') {
-        try {
-          const savedMessages = localStorage.getItem(LOCAL_STORAGE_KEY);
-          if (savedMessages) {
-            const parsedMessages = JSON.parse(savedMessages);
-            if (Array.isArray(parsedMessages) && parsedMessages.length > 0) {
-              setMessages(parsedMessages);
-              const lastBotMessage = parsedMessages.filter(m => m.sender === 'bot' && !m.isLoading).pop();
-              if (lastBotMessage && lastBotMessage.suggestions && lastBotMessage.suggestions.length > 0) {
-                 setCurrentSuggestions(lastBotMessage.suggestions);
-              } else {
-                setCurrentSuggestions(INITIAL_SUGGESTIONS.slice(0,4));
-              }
+    if (isOpen && typeof window !== 'undefined') {
+      try {
+        const savedMessages = localStorage.getItem(LOCAL_STORAGE_KEY);
+        if (savedMessages) {
+          const parsedMessages = JSON.parse(savedMessages);
+          if (Array.isArray(parsedMessages) && parsedMessages.length > 0) {
+            setMessages(parsedMessages);
+            const lastBotMessage = parsedMessages.filter(m => m.sender === 'bot' && !m.isLoading).pop();
+            if (lastBotMessage && lastBotMessage.suggestions && lastBotMessage.suggestions.length > 0) {
+               setCurrentSuggestions(lastBotMessage.suggestions);
             } else {
-              setMessages([initialBotMessage]);
-              setCurrentSuggestions(initialBotMessage.suggestions || INITIAL_SUGGESTIONS.slice(0, 4));
+              setCurrentSuggestions(INITIAL_SUGGESTIONS.slice(0,4));
             }
           } else {
             setMessages([initialBotMessage]);
             setCurrentSuggestions(initialBotMessage.suggestions || INITIAL_SUGGESTIONS.slice(0, 4));
           }
-        } catch (error) {
+        } else {
           setMessages([initialBotMessage]);
           setCurrentSuggestions(initialBotMessage.suggestions || INITIAL_SUGGESTIONS.slice(0, 4));
         }
+      } catch (error) {
+        setMessages([initialBotMessage]);
+        setCurrentSuggestions(initialBotMessage.suggestions || INITIAL_SUGGESTIONS.slice(0, 4));
       }
       setSuggestionsExpanded(false); 
       setTimeout(() => inputRef.current?.focus(), 100);
@@ -107,7 +101,7 @@ export function ChatbotDialog() {
       try {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(messages));
       } catch (error) {
-        // console.error("Failed to save chat history to localStorage:", error);
+        // ignore storage errors
       }
     }
   }, [messages, isOpen]);
@@ -119,7 +113,6 @@ export function ChatbotDialog() {
       });
     }
   }, [messages]);
-
 
   const processMessage = async (messageText: string) => {
     if (!messageText.trim() || isLoading) return;
@@ -210,7 +203,7 @@ export function ChatbotDialog() {
       try {
         localStorage.removeItem(LOCAL_STORAGE_KEY);
       } catch (error) {
-        // console.error("Failed to clear chat history from localStorage:", error);
+        // ignore error
       }
     }
     toast({
@@ -220,41 +213,35 @@ export function ChatbotDialog() {
     inputRef.current?.focus();
   };
 
-  const handleCopyChat = () => {
-    const chatText = messages
-      .filter(m => !m.isLoading)
-      .map(m => `${m.sender.toUpperCase()}: ${m.text}`)
-      .join('\n\n');
-    
-    navigator.clipboard.writeText(chatText).then(() => {
-      setCopied(true);
-      toast({ title: "Copied!" });
-      setTimeout(() => setCopied(false), 2000);
-    });
-  };
-
   const chatWindowVariants = {
-    closed: { opacity: 0, y: 50, scale: 0.95 },
+    closed: { opacity: 0, y: 30, scale: 0.95 },
     open: { opacity: 1, y: 0, scale: 1 }
   };
 
   const gridTemplateRows = currentSuggestions.length > 0 ? "auto auto 1fr auto" : "auto 1fr auto";
 
-  return (
+  if (!mounted || typeof document === "undefined") return null;
+
+  return createPortal(
     <>
-      <div className="fixed bottom-6 right-6 z-50">
+      {/* Floating Chat Trigger Button - Viewport Fixed & Always Visible from top to bottom */}
+      <div className="fixed bottom-6 right-6 z-[9999] pointer-events-auto">
         <Button
           onClick={() => setIsOpen(!isOpen)}
           size="icon"
-          className="rounded-full h-14 w-14 shadow-lg hover:scale-110 transition-transform bg-primary hover:bg-primary/90 p-0 overflow-hidden"
+          className={cn(
+            "rounded-full h-14 w-14 shadow-2xl transition-all duration-300 transform hover:scale-110 p-0 overflow-hidden border-2 border-primary/40",
+            isOpen ? "bg-card text-foreground border-border" : "bg-primary text-primary-foreground hover:bg-primary/90"
+          )}
+          aria-label="Toggle Sora AI Chatbot"
         >
           {isOpen ? (
-            <X className="h-7 w-7" />
+            <X className="h-6 w-6" />
           ) : (
-            <Avatar className="h-full w-full border-2 border-primary/20">
+            <Avatar className="h-full w-full">
               <AvatarImage 
                 src={SORA_AVATAR_URL} 
-                alt="Sora"
+                alt="Sora AI"
                 className="object-cover"
               />
               <AvatarFallback className="bg-primary text-primary-foreground">
@@ -265,6 +252,7 @@ export function ChatbotDialog() {
         </Button>
       </div>
 
+      {/* Floating Chatbot Window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -272,75 +260,85 @@ export function ChatbotDialog() {
             initial="closed"
             animate="open"
             exit="closed"
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
             className={cn(
-              "fixed bottom-24 z-40 rounded-xl bg-background shadow-2xl border border-border overflow-hidden grid",
+              "fixed bottom-24 z-[9999] rounded-2xl bg-card/95 backdrop-blur-xl shadow-2xl border border-border overflow-hidden grid pointer-events-auto",
               "left-4 right-4 w-auto", 
-              "md:left-auto md:right-6 md:w-full md:max-w-md", 
-              "lg:max-w-lg"
+              "sm:left-auto sm:right-6 sm:w-[380px]", 
+              "md:w-[420px]"
             )}
             style={{ 
-              maxHeight: 'min(calc(100vh - 12rem), 85vh)',
+              maxHeight: 'min(calc(100vh - 7.5rem), 620px)',
               gridTemplateRows: gridTemplateRows 
             }} 
           >
-            <header className="bg-card p-3 border-b border-border flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                 <Avatar className="h-8 w-8 border border-primary/50 overflow-hidden">
+            <header className="bg-secondary/40 p-3.5 border-b border-border flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <Avatar className="h-9 w-9 border border-primary/50 overflow-hidden shadow-sm">
                   <AvatarImage 
                     src={SORA_AVATAR_URL} 
                     alt="Sora AI Assistant"
                     className="object-cover"
                   />
                   <AvatarFallback className="text-[10px]">
-                    <Bot className="h-4 w-4" />
+                    <Bot className="h-5 w-5" />
                   </AvatarFallback>
                 </Avatar>
-                <h3 className="font-semibold text-lg text-primary font-headline">Sora Assistant</h3>
+                <div>
+                  <h3 className="font-semibold text-base text-foreground font-headline flex items-center gap-1.5">
+                    Sora Assistant
+                    <span className="flex h-2 w-2 relative">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                  </h3>
+                  <p className="text-[11px] text-muted-foreground">Tinkal&apos;s Portfolio Assistant</p>
+                </div>
               </div>
+
               <div className="flex items-center gap-1">
-                {/* <Button variant="ghost" size="icon" onClick={handleCopyChat} className="h-8 w-8">
-                  {copied ? <CheckCircle2 className="h-5 w-5 text-green-500" /> : <Copy className="h-5 w-5" />}
-                </Button> */}
-                <Button variant="ghost" size="icon" onClick={handleClearChat} className="h-8 w-8 hover:text-destructive">
-                  <Trash2 className="h-5 w-5" />
+                <Button variant="ghost" size="icon" onClick={handleClearChat} className="h-8 w-8 hover:text-destructive text-muted-foreground" title="Clear chat history">
+                  <Trash2 className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="h-8 w-8">
-                  <X className="h-5 w-5" />
+                <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="h-8 w-8 text-muted-foreground">
+                  <X className="h-4 w-4" />
                 </Button>
               </div>
             </header>
 
             {currentSuggestions.length > 0 && (
-              <div className="p-3 border-b border-border bg-card/50">
+              <div className="p-2.5 border-b border-border/60 bg-secondary/20">
                 {!suggestionsExpanded ? (
                   <Button
                     variant="ghost"
-                    className="w-full justify-start text-sm text-primary py-2"
+                    size="sm"
+                    className="w-full justify-start text-xs text-primary py-1.5 h-auto"
                     onClick={() => setSuggestionsExpanded(true)}
                     disabled={isLoading}
                   >
-                    <MessageSquarePlus className="h-4 w-4 mr-2" />
-                    View Suggestions
-                    <ChevronDown className="h-4 w-4 ml-auto" />
+                    <MessageSquarePlus className="h-3.5 w-3.5 mr-1.5" />
+                    Suggested Questions
+                    <ChevronDown className="h-3.5 w-3.5 ml-auto" />
                   </Button>
                 ) : (
                   <>
                     <Button
                       variant="ghost"
-                      className="w-full justify-start text-sm text-muted-foreground mb-2 py-2"
+                      size="sm"
+                      className="w-full justify-start text-xs text-muted-foreground mb-2 py-1.5 h-auto"
                       onClick={() => setSuggestionsExpanded(false)}
                     >
-                      <MessageSquarePlus className="h-4 w-4 mr-2" />
+                      <MessageSquarePlus className="h-3.5 w-3.5 mr-1.5" />
                       Hide Suggestions
-                      <ChevronUp className="h-4 w-4 ml-auto" />
+                      <ChevronUp className="h-3.5 w-3.5 ml-auto" />
                     </Button>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5">
                       {currentSuggestions.map((q, index) => (
                         <Button
                           key={index}
                           variant="outline"
                           size="sm"
-                          className="text-xs rounded-full bg-card"
+                          className="text-[11px] h-auto py-1 px-2.5 rounded-full bg-card hover:bg-primary/10 border-border"
                           onClick={() => handleSuggestionClick(q)}
                           disabled={isLoading}
                         >
@@ -353,7 +351,7 @@ export function ChatbotDialog() {
               </div>
             )}
 
-            <ScrollArea ref={scrollAreaRef} className="p-4 min-h-0">
+            <ScrollArea ref={scrollAreaRef} className="p-4 min-h-[220px]">
               {messages.map((msg) => (
                 <ChatMessage key={msg.id} sender={msg.sender} text={msg.text} isLoading={msg.isLoading} />
               ))}
@@ -371,20 +369,21 @@ export function ChatbotDialog() {
                 <Input
                   ref={inputRef}
                   type="text"
-                  placeholder="Ask Sora anything..."
+                  placeholder="Ask Sora anything about Tinkal..."
                   value={currentInput}
                   onChange={(e) => setCurrentInput(e.target.value)}
                   disabled={isLoading}
-                  className="flex-grow h-10"
+                  className="flex-grow h-9 text-xs sm:text-sm bg-background border-border/80"
                 />
-                <Button type="submit" size="icon" disabled={isLoading || !currentInput.trim()} className="h-10 w-10">
-                  {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
+                <Button type="submit" size="icon" disabled={isLoading || !currentInput.trim()} className="h-9 w-9 flex-shrink-0">
+                  {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                 </Button>
               </form>
             </footer>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    < />,
+    document.body
   );
 }

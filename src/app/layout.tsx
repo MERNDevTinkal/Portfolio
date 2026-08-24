@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
@@ -9,6 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { APP_NAME, AUTHOR_NAME, AUTHOR_EMAIL, SOCIAL_LINKS, LOGO_PATH } from "@/lib/data";
 import { DynamicChatbotLoader } from "@/components/layout/DynamicChatbotLoader";
 import { CommandPalette } from "@/components/layout/CommandPalette";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     ],
     locale: "en_US",
     type: "website",
-  },
+    },
 };
 
 const personStructuredData = {
@@ -104,6 +104,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <Toaster />
+          <ScrollToTop />
           <DynamicChatbotLoader /> 
         </ThemeProvider>
       </body>

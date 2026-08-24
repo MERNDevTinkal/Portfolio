@@ -683,3 +683,16 @@ export const EMAILJS_CONFIG = {
   templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "YOUR_EMAILJS_TEMPLATE_ID",
   publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "YOUR_EMAILJS_PUBLIC_KEY",
 };
+
+export function getProjectById(id: string): Project | undefined {
+  return PROJECTS_DATA.find((p) => p.id === id);
+}
+
+export function getServiceById(id: string): ServiceCard | undefined {
+  return SERVICES_DATA.find((s) => s.id === id);
+}
+
+export function getIndustryById(id: string): IndustryCard | undefined {
+  return INDUSTRIES_DATA.find((i) => i.id === id);
+}
+

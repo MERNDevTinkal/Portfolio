@@ -1,9 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { SectionWrapper, SectionHeader } from "@/components/ui/SectionWrapper";
 import { INDUSTRIES_DATA } from "@/lib/data";
-import { Building } from "lucide-react";
+import { Building, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 export function Industries() {
@@ -12,8 +13,8 @@ export function Industries() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
+        staggerChildren: 0.08,
+        delayChildren: 0.1,
       },
     },
   };
@@ -23,7 +24,7 @@ export function Industries() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 },
+      transition: { duration: 0.4 },
     },
   };
 
@@ -31,7 +32,7 @@ export function Industries() {
     <SectionWrapper id="industries" className="overflow-hidden w-full max-w-full">
       <SectionHeader 
         title="Industries I've Built For" 
-        description="Experience across multiple sectors—healthcare, veterinary, education, entertainment, and more."
+        subtitle="Proven software development experience across multiple domains—healthcare, veterinary, education, hospitality, wellness, and more. Click any domain card for technical breakdown."
         Icon={Building} 
       />
       <motion.div
@@ -45,31 +46,36 @@ export function Industries() {
           const IconComponent = industry.Icon;
           return (
             <motion.div key={industry.id} variants={itemVariants}>
-              <Card className="h-full hover:shadow-xl hover:border-primary/50 transition-all duration-300 bg-card border border-border/80 group">
-                <CardHeader>
-                  <div className="flex items-start justify-between mb-2">
-                    <CardTitle className="text-xl font-semibold text-primary group-hover:text-accent transition-colors">
-                      {industry.name}
-                    </CardTitle>
-                    <IconComponent className="h-5 w-5 text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <CardDescription className="text-base leading-relaxed text-muted-foreground">
-                    {industry.description}
-                  </CardDescription>
-                  <div className="flex flex-wrap gap-2">
-                    {industry.examples.map((example, idx) => (
-                      <span
-                        key={idx}
-                        className="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground font-medium"
-                      >
-                        {example}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              <Link href={`/industries/${industry.id}`} className="block h-full outline-none focus:ring-2 focus:ring-primary rounded-2xl">
+                <Card className="h-full cursor-pointer hover:shadow-xl hover:border-primary/60 transition-all duration-300 bg-card border border-border/80 group transform hover:-translate-y-1 relative">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-start justify-between mb-2">
+                      <CardTitle className="text-xl font-semibold text-primary group-hover:text-accent transition-colors flex items-center gap-2">
+                        {industry.name}
+                      </CardTitle>
+                      <IconComponent className="h-5 w-5 text-accent group-hover:scale-110 transition-transform flex-shrink-0" />
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <CardDescription className="text-sm leading-relaxed text-muted-foreground line-clamp-3">
+                      {industry.description}
+                    </CardDescription>
+                    <div className="flex flex-wrap gap-1.5">
+                      {industry.examples.map((example, idx) => (
+                        <span
+                          key={idx}
+                          className="text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground font-medium"
+                        >
+                          {example}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="pt-2 text-xs font-semibold text-primary group-hover:underline inline-flex items-center gap-1">
+                      View Domain Solutions <ArrowRight className="h-3.5 w-3.5" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             </motion.div>
           );
         })}

@@ -95,9 +95,6 @@ html {
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-inter), sans-serif;
-    /* GPU acceleration for smooth animations */
-    transform: translateZ(0);
-    backface-visibility: hidden;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-headline;
