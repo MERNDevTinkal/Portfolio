@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { APP_NAME, AUTHOR_NAME, AUTHOR_EMAIL, SOCIAL_LINKS, LOGO_PATH } from "@/lib/data";
 import { DynamicChatbotLoader } from "@/components/layout/DynamicChatbotLoader";
 import { CommandPalette } from "@/components/layout/CommandPalette";
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -104,6 +105,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <Toaster />
+          <ScrollToTop />
           <DynamicChatbotLoader /> 
         </ThemeProvider>
       </body>
