@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { HERO_TITLES, SOCIAL_LINKS, RESUME_PATH, AUTHOR_NAME, PROFILE_IMAGES } from "@/lib/data";
+import { getRandomHeroTitles, SOCIAL_LINKS, RESUME_PATH, AUTHOR_NAME, PROFILE_IMAGES } from "@/lib/data";
 
 // Swiper imports
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -43,6 +43,9 @@ export function Hero() {
 
   // Generate random particles
   const [particles, setParticles] = useState<Array<{id: number, x: number, y: number, size: number, duration: number, delay: number, randomX: number}>>([]);
+
+  // Pick 399 unique random phrases from the 1000+ pool on mount — keeps every session fresh
+  const [heroTitles, setHeroTitles] = useState<string[]>(() => getRandomHeroTitles(399));
 
   useEffect(() => {
     setParticles(Array.from({ length: 20 }).map((_, i) => ({
@@ -121,7 +124,7 @@ export function Hero() {
               <span className="mr-2">I build</span>
               <span className="font-semibold text-accent dark:text-accent">
                 <Typewriter
-                  words={HERO_TITLES}
+                  words={heroTitles}
                   loop={true}
                   cursor
                   cursorStyle="|"
