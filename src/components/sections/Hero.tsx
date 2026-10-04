@@ -139,7 +139,7 @@ export function Hero() {
               variants={textItemVariants}
               className="text-lg text-muted-foreground max-w-xl mx-auto md:mx-0 leading-relaxed"
             >
-              MERN Stack Developer specializing in building production-ready web applications. I develop scalable, high-performance systems using React, Next.js, Node.js, and TypeScript. Available for freelance projects on Upwork and custom software development.
+              Full Stack Engineer & AI Agent Specialist building production-ready applications, real-time voice agents, and cloud systems. Experienced in MERN Stack, Next.js, TypeScript, Twilio Voice, and Gemini. Available for freelance projects and high-impact engineering roles.
             </motion.p>
           </div>
 

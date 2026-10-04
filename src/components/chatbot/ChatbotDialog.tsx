@@ -7,7 +7,6 @@ import {
   Trash2, Bot,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { ChatMessage } from "./ChatMessage";
 import { getPortfolioChatResponse } from "@/ai/flows/portfolio-chat-flow";
 import type { PortfolioChatOutput } from "@/ai/flows/portfolio-chat-types";
@@ -27,21 +26,19 @@ interface Message {
 
 const INITIAL_SUGGESTIONS = [
   `What are ${AUTHOR_NAME}'s key skills?`,
-  `Tell me about a project ${AUTHOR_NAME} worked on.`,
+  `Tell me about ${AUTHOR_NAME}'s AI Voice Agent project.`,
   `What is ${AUTHOR_NAME}'s work experience?`,
+  `What is ${AUTHOR_NAME}'s backend & cloud experience?`,
+  `Why should a recruiter hire ${AUTHOR_NAME}?`,
   `How can I contact ${AUTHOR_NAME}?`,
-  `What certifications does ${AUTHOR_NAME} hold?`,
-  `Describe ${AUTHOR_NAME}'s education.`,
-  `What is ${AUTHOR_NAME} passionate about?`,
-  `Is ${AUTHOR_NAME} open to relocation?`,
 ];
 
-const LOCAL_STORAGE_KEY = "portfolioChatHistory_Sora_v3";
+const LOCAL_STORAGE_KEY = "portfolioChatHistory_Tinkal_v4";
 
 const initialBotMessage: Message = {
-  id: "initial-bot-message-sora",
+  id: "initial-bot-message-tinkal",
   sender: "bot",
-  text: `Hello! I'm Sora, Tinkal's personal AI assistant. Ask me about his skills, projects, experience, or how to get in touch!`,
+  text: `Hello! I'm Tinkal's portfolio assistant. I can help you learn about Tinkal's experience, technical skills, projects, and professional background. What would you like to know about him?`,
   suggestions: INITIAL_SUGGESTIONS.slice(0, 4),
 };
 
@@ -51,10 +48,10 @@ export function ChatbotDialog() {
   const [currentInput, setCurrentInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [currentSuggestions, setCurrentSuggestions] = useState<string[]>([]);
-  const [suggestionsExpanded, setSuggestionsExpanded] = useState(false);
+  const [suggestionsExpanded, setSuggestionsExpanded] = useState(true);
   const [mounted, setMounted] = useState(false);
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   // Point directly at the native scrollable div (not Radix's Root)
   const messagesScrollRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -62,19 +59,29 @@ export function ChatbotDialog() {
   const { toast } = useToast();
 
   /**
-   * Reliably restore focus to the input.
+   * Reliably restore focus to the input textarea.
    * Uses requestAnimationFrame so it runs AFTER React's DOM commit and
    * browser layout, preventing scroll/state-update races from stealing focus.
    */
   const focusInput = useCallback(() => {
     requestAnimationFrame(() => {
-      inputRef.current?.focus();
+      textareaRef.current?.focus();
     });
   }, []);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Auto-resize the textarea based on content
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      const scrollH = textareaRef.current.scrollHeight;
+      const nextH = Math.min(Math.max(scrollH, 38), 120);
+      textareaRef.current.style.height = `${nextH}px`;
+    }
+  }, [currentInput]);
 
   // Load / reset chat history when panel opens
   useEffect(() => {
@@ -101,7 +108,6 @@ export function ChatbotDialog() {
       setMessages([initialBotMessage]);
       setCurrentSuggestions(initialBotMessage.suggestions ?? INITIAL_SUGGESTIONS.slice(0, 4));
     }
-    setSuggestionsExpanded(false);
     // Small delay so the AnimatePresence animation settles before focusing
     setTimeout(() => focusInput(), 150);
   }, [isOpen, focusInput]);
@@ -136,8 +142,6 @@ export function ChatbotDialog() {
     // Allow queuing while a previous response is loading — guard only against
     // truly empty messages, not against isLoading, so rapid-fire works.
 
-    setSuggestionsExpanded(false);
-
     const userMessage: Message = {
       id: `${Date.now()}-user-${Math.random().toString(36).substring(7)}`,
       sender: "user",
@@ -148,7 +152,7 @@ export function ChatbotDialog() {
     setMessages(messagesWithUser);
 
     const history = messagesWithUser.map(m => ({
-      role: m.sender === "bot" ? "assistant" : "user",
+      role: (m.sender === "bot" ? "assistant" : "user") as "assistant" | "user",
       content: m.text,
     }));
 
@@ -214,7 +218,7 @@ export function ChatbotDialog() {
   const handleClearChat = () => {
     setMessages([initialBotMessage]);
     setCurrentSuggestions(INITIAL_SUGGESTIONS.slice(0, 4));
-    setSuggestionsExpanded(false);
+    setSuggestionsExpanded(true);
     setCurrentInput("");
     try { localStorage.removeItem(LOCAL_STORAGE_KEY); } catch { /* ignore */ }
     toast({ title: "Chat Cleared", description: "Memory has been reset." });
@@ -317,13 +321,13 @@ export function ChatbotDialog() {
               </div>
             </header>
 
-            {/* Suggested Questions — never scrolls, collapses */}
+            {/* Suggested Questions — open by default */}
             {currentSuggestions.length > 0 && (
               <div className="flex-shrink-0 p-2.5 border-b border-border/60 bg-secondary/20 min-w-0">
                 {!suggestionsExpanded ? (
                   <Button
                     variant="ghost" size="sm"
-                    className="w-full justify-start text-xs text-primary py-1.5 h-auto"
+                    className="w-full justify-start text-xs text-primary py-1.5 h-auto hover:bg-secondary/40"
                     onClick={() => setSuggestionsExpanded(true)}
                     disabled={isLoading}
                   >
@@ -333,17 +337,22 @@ export function ChatbotDialog() {
                   </Button>
                 ) : (
                   <>
-                    <Button
-                      variant="ghost" size="sm"
-                      className="w-full justify-start text-xs text-muted-foreground mb-2 py-1.5 h-auto"
-                      onClick={() => setSuggestionsExpanded(false)}
-                    >
-                      <MessageSquarePlus className="h-3.5 w-3.5 mr-1.5 flex-shrink-0" />
-                      <span className="truncate">Hide Suggestions</span>
-                      <ChevronUp className="h-3.5 w-3.5 ml-auto flex-shrink-0" />
-                    </Button>
+                    <div className="flex items-center justify-between mb-1.5 px-0.5">
+                      <span className="text-[11px] font-medium text-muted-foreground flex items-center gap-1.5">
+                        <MessageSquarePlus className="h-3.5 w-3.5 text-primary" />
+                        Suggested Questions
+                      </span>
+                      <Button
+                        variant="ghost" size="sm"
+                        className="h-6 px-1.5 text-[10px] text-muted-foreground hover:text-foreground hover:bg-secondary/40"
+                        onClick={() => setSuggestionsExpanded(false)}
+                      >
+                        Hide
+                        <ChevronUp className="h-3 w-3 ml-1" />
+                      </Button>
+                    </div>
                     {/* Wrap chips; each chip text wraps internally */}
-                    <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto">
+                    <div className="flex flex-wrap gap-1.5 max-h-28 overflow-y-auto pr-0.5">
                       {currentSuggestions.map((q, i) => (
                         <Button
                           key={i}
@@ -384,27 +393,32 @@ export function ChatbotDialog() {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Footer / Input — never scrolls */}
+            {/* Footer / Input — multiline auto-expanding textarea */}
             <footer className="flex-shrink-0 p-3 border-t border-border bg-card">
               <form
                 onSubmit={e => { e.preventDefault(); handleSendCurrentInput(); }}
-                className="flex items-center gap-2 min-w-0"
+                className="flex items-end gap-2 min-w-0"
               >
-                <Input
-                  ref={inputRef}
-                  type="text"
-                  placeholder="Ask Sora anything about Tinkal..."
+                <textarea
+                  ref={textareaRef}
+                  rows={1}
+                  placeholder="Ask Sora anything about Tinkal... (Shift+Enter for new line)"
                   value={currentInput}
                   onChange={e => setCurrentInput(e.target.value)}
-                  // NOT disabled during loading — disabling blurs the input, losing focus.
-                  // The Send button is disabled instead to prevent double-sending.
-                  className="flex-1 min-w-0 h-9 text-xs sm:text-sm bg-background border-border/80"
+                  onKeyDown={e => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSendCurrentInput();
+                    }
+                  }}
+                  className="flex-1 min-w-0 resize-none rounded-md border border-border/80 bg-background px-3 py-2 text-xs sm:text-sm leading-relaxed shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 overflow-y-auto"
+                  style={{ minHeight: "38px", maxHeight: "120px" }}
                 />
                 <Button
                   type="submit"
                   size="icon"
                   disabled={isLoading || !currentInput.trim()}
-                  className="h-9 w-9 flex-shrink-0"
+                  className="h-9 w-9 flex-shrink-0 mb-[1px]"
                 >
                   {isLoading
                     ? <Loader2 className="h-4 w-4 animate-spin" />

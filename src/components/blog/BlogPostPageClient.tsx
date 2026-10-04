@@ -1,7 +1,10 @@
 
 "use client"; // This component is a Client Component
 
-import type { BlogPageProps } from '@/app/blog/[id]/page'; // Import the props type
+export interface BlogPostClientProps {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Mail, AlertTriangle } from 'lucide-react';
@@ -96,7 +99,7 @@ function getProcessedTitleParam(titleParam: string | string[] | undefined): stri
   }
 }
 
-export default function BlogPostPageClient({ params, searchParams }: BlogPageProps) {
+export default function BlogPostPageClient({ params, searchParams }: BlogPostClientProps) {
   const { id } = params;
   const pageTitle = getProcessedTitleParam(searchParams.title);
 

@@ -133,11 +133,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </h2>
               <div className="p-5 rounded-2xl bg-card border border-border/70 space-y-3 text-muted-foreground leading-relaxed text-sm sm:text-base">
                 <p>
-                  {project.title} was engineered to solve real operational and workflow challenges in its target domain. Built with high emphasis on scalability, system resilience, and clean API design, this application serves production workloads with zero compromise on performance.
+                  {project.overview || `${project.title} was engineered to solve real operational and workflow challenges in its target domain. Built with high emphasis on scalability, system resilience, and clean API design, this application serves production workloads with zero compromise on performance.`}
                 </p>
-                <p>
-                  Key architectural decisions focused on modular component design, responsive interfaces across viewports, secure data validation, and automated cloud deployments.
-                </p>
+                {!project.overview && (
+                  <p>
+                    Key architectural decisions focused on modular component design, responsive interfaces across viewports, secure data validation, and automated cloud deployments.
+                  </p>
+                )}
               </div>
             </section>
 
@@ -148,27 +150,41 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 My Role & Key Contributions
               </h2>
               <div className="grid gap-3">
-                <div className="p-4 rounded-xl bg-card border border-border/60 flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-foreground text-sm sm:text-base">Full-Stack Application Development</h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground">Architected and implemented core business workflows using React, Node.js, Express, and TypeScript.</p>
-                  </div>
-                </div>
-                <div className="p-4 rounded-xl bg-card border border-border/60 flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-foreground text-sm sm:text-base">API Architecture & Third-Party Integrations</h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground">Designed secure RESTful API endpoints, request validation rules, and third-party service integrations.</p>
-                  </div>
-                </div>
-                <div className="p-4 rounded-xl bg-card border border-border/60 flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-foreground text-sm sm:text-base">Performance & Cloud Infrastructure</h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground">Optimized database querying, asset management via AWS S3, and real-time state synchronization.</p>
-                  </div>
-                </div>
+                {project.contributions && project.contributions.length > 0 ? (
+                  project.contributions.map((c, i) => (
+                    <div key={i} className="p-4 rounded-xl bg-card border border-border/60 flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <h3 className="font-semibold text-foreground text-sm sm:text-base">{c.title}</h3>
+                        <p className="text-xs sm:text-sm text-muted-foreground">{c.description}</p>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <>
+                    <div className="p-4 rounded-xl bg-card border border-border/60 flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <h3 className="font-semibold text-foreground text-sm sm:text-base">Full-Stack Application Development</h3>
+                        <p className="text-xs sm:text-sm text-muted-foreground">Architected and implemented core business workflows using React, Node.js, Express, and TypeScript.</p>
+                      </div>
+                    </div>
+                    <div className="p-4 rounded-xl bg-card border border-border/60 flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <h3 className="font-semibold text-foreground text-sm sm:text-base">API Architecture & Third-Party Integrations</h3>
+                        <p className="text-xs sm:text-sm text-muted-foreground">Designed secure RESTful API endpoints, request validation rules, and third-party service integrations.</p>
+                      </div>
+                    </div>
+                    <div className="p-4 rounded-xl bg-card border border-border/60 flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <h3 className="font-semibold text-foreground text-sm sm:text-base">Performance & Cloud Infrastructure</h3>
+                        <p className="text-xs sm:text-sm text-muted-foreground">Optimized database querying, asset management via AWS S3, and real-time state synchronization.</p>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </section>
 
@@ -179,22 +195,33 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 Key Functionality & Capabilities
               </h2>
               <div className="grid sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl bg-card border border-border/60 space-y-1">
-                  <span className="font-semibold text-foreground block text-sm sm:text-base">Real-Time Operations</span>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Instant event notifications, status updates, and interactive user state synchronization.</p>
-                </div>
-                <div className="p-4 rounded-xl bg-card border border-border/60 space-y-1">
-                  <span className="font-semibold text-foreground block text-sm sm:text-base">Role-Based Access Control</span>
-                  <p className="text-xs sm:text-sm text-muted-foreground">JWT authentication with granular permission layers for admins, providers, and users.</p>
-                </div>
-                <div className="p-4 rounded-xl bg-card border border-border/60 space-y-1">
-                  <span className="font-semibold text-foreground block text-sm sm:text-base">Cloud Asset Pipeline</span>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Direct-to-S3 secure file uploads, media processing, and CDN asset delivery.</p>
-                </div>
-                <div className="p-4 rounded-xl bg-card border border-border/60 space-y-1">
-                  <span className="font-semibold text-foreground block text-sm sm:text-base">Mobile-First UI</span>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Fluid, high-contrast user interfaces supporting touch devices and desktop displays.</p>
-                </div>
+                {project.keyFeatures && project.keyFeatures.length > 0 ? (
+                  project.keyFeatures.map((f, i) => (
+                    <div key={i} className="p-4 rounded-xl bg-card border border-border/60 space-y-1">
+                      <span className="font-semibold text-foreground block text-sm sm:text-base">{f.title}</span>
+                      <p className="text-xs sm:text-sm text-muted-foreground">{f.description}</p>
+                    </div>
+                  ))
+                ) : (
+                  <>
+                    <div className="p-4 rounded-xl bg-card border border-border/60 space-y-1">
+                      <span className="font-semibold text-foreground block text-sm sm:text-base">Real-Time Operations</span>
+                      <p className="text-xs sm:text-sm text-muted-foreground">Instant event notifications, status updates, and interactive user state synchronization.</p>
+                    </div>
+                    <div className="p-4 rounded-xl bg-card border border-border/60 space-y-1">
+                      <span className="font-semibold text-foreground block text-sm sm:text-base">Role-Based Access Control</span>
+                      <p className="text-xs sm:text-sm text-muted-foreground">JWT authentication with granular permission layers for admins, providers, and users.</p>
+                    </div>
+                    <div className="p-4 rounded-xl bg-card border border-border/60 space-y-1">
+                      <span className="font-semibold text-foreground block text-sm sm:text-base">Cloud Asset Pipeline</span>
+                      <p className="text-xs sm:text-sm text-muted-foreground">Direct-to-S3 secure file uploads, media processing, and CDN asset delivery.</p>
+                    </div>
+                    <div className="p-4 rounded-xl bg-card border border-border/60 space-y-1">
+                      <span className="font-semibold text-foreground block text-sm sm:text-base">Mobile-First UI</span>
+                      <p className="text-xs sm:text-sm text-muted-foreground">Fluid, high-contrast user interfaces supporting touch devices and desktop displays.</p>
+                    </div>
+                  </>
+                )}
               </div>
             </section>
 
@@ -206,15 +233,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </h2>
               <div className="p-5 rounded-2xl bg-card border border-border/70 space-y-4">
                 <div>
-                  <h3 className="font-semibold text-foreground text-sm sm:text-base">Challenge: Ensuring High Availability & Data Integrity</h3>
+                  <h3 className="font-semibold text-foreground text-sm sm:text-base">
+                    {project.challenge?.title || "Challenge: Ensuring High Availability & Data Integrity"}
+                  </h3>
                   <p className="text-xs sm:text-sm text-muted-foreground mt-1 leading-relaxed">
-                    Production applications handle concurrent client requests where data consistency and fast response times are paramount.
+                    {project.challenge?.description || "Production applications handle concurrent client requests where data consistency and fast response times are paramount."}
                   </p>
                 </div>
                 <div className="pt-3 border-t border-border/50">
-                  <h3 className="font-semibold text-primary text-sm sm:text-base">Solution: Microservices & Modular Database Patterns</h3>
+                  <h3 className="font-semibold text-primary text-sm sm:text-base">
+                    {project.challenge?.solutionTitle || "Solution: Microservices & Modular Database Patterns"}
+                  </h3>
                   <p className="text-xs sm:text-sm text-muted-foreground mt-1 leading-relaxed">
-                    Implemented structured controller-service-repository patterns, robust error boundary layers, indexed database queries, and caching mechanisms to maintain fast API response times.
+                    {project.challenge?.solutionDescription || "Implemented structured controller-service-repository patterns, robust error boundary layers, indexed database queries, and caching mechanisms to maintain fast API response times."}
                   </p>
                 </div>
               </div>

@@ -29,7 +29,6 @@ export async function createGroqCompletion(
     temperature: 1,
     max_completion_tokens: 2048,
     top_p: 1,
-    reasoning_effort: 'medium',
     stream: true,
     stop: null,
   });

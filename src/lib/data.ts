@@ -5,7 +5,8 @@ import {
   ServerCog, Wand2, Palette, Settings2, ShoppingCart, FileText, BookOpen,
   GraduationCap, Building, Award, ExternalLink, UserCircle2, KeyRound, ShieldCheck,
   UploadCloud, Smartphone, Layers, Puzzle, Lightbulb, TerminalSquare, GitCommit, Wrench,
-  Send, Brain, MessageSquareText, Rocket, NotebookText, Scale, Instagram, BarChart3, Video
+  Send, Brain, MessageSquareText, Rocket, NotebookText, Scale, Instagram, BarChart3, Video,
+  Bot
 } from 'lucide-react';
 
 import {
@@ -43,8 +44,37 @@ export const SOCIAL_LINKS = [
 // HERO_TITLES_POOL — 1000+ unique phrases, each works after "I build …"
 // The UI picks a small random subset on each page load via getRandomHeroTitles()
 // so the Typewriter animation stays lightweight.
-// ---------------------------------------------------------------------------
+export const PRIORITY_HERO_TITLES: string[] = [
+  "AI Voice Calling Agents",
+  "Autonomous AI Agents",
+  "AI Agent Development",
+  "Conversational AI Platforms",
+  "AI Agent Architectures",
+  "Multi-Agent AI Systems",
+  "Real-Time Voice AI Platforms",
+  "RAG-Powered AI Voice Systems",
+  "Intelligent AI Phone Agents",
+  "Scalable MERN Stack Applications",
+  "Production Cloud-Native Systems",
+];
+
 export const HERO_TITLES_POOL: string[] = [
+  // ── AI Agents & Conversational Voice ─────────────────────────────────────
+  "AI Voice Calling Agents",
+  "Autonomous AI Agents",
+  "Conversational AI Platforms",
+  "AI Agent Architectures",
+  "Real-Time Voice AI Platforms",
+  "RAG-Powered AI Voice Systems",
+  "Intelligent AI Phone Agents",
+  "Multi-Agent AI Workflows",
+  "AI Customer Support Agents",
+  "AI Telephony Automation",
+  "Voice AI Streaming Pipelines",
+  "Interactive Conversational Agents",
+  "Production AI Agent Systems",
+  "Twilio & Gemini AI Agents",
+  "Enterprise AI Agent Solutions",
   // ── Full Stack & MERN/MEAN/PERN ──────────────────────────────────────────
   "Modern Full Stack Applications",
   "Scalable MERN Stack Applications",
@@ -1076,12 +1106,14 @@ export const HERO_TITLES_POOL: string[] = [
  */
 export function getRandomHeroTitles(count: number = 399): string[] {
   const pool = [...HERO_TITLES_POOL];
-  const take = Math.min(count, pool.length);
-  for (let i = 0; i < take; i++) {
-    const idx = Math.floor(Math.random() * (pool.length - i)) + i;
-    [pool[i], pool[idx]] = [pool[idx], pool[i]];
+  // Shuffle pool using Fisher-Yates
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
   }
-  return pool.slice(0, take);
+  // Ensure priority AI agent and full-stack titles appear first, deduplicated
+  const combined = Array.from(new Set([...PRIORITY_HERO_TITLES, ...pool]));
+  return combined.slice(0, count);
 }
 
 // Legacy export kept for backward compatibility
@@ -1094,7 +1126,7 @@ export const PROFILE_IMAGES = [
 export const RESUME_PATH = "/Tinkal_Resume.pdf";
 
 export const ABOUT_ME = {
-  summary: `MERN Stack Developer and Full Stack Engineer specialized in building production-grade web applications. I develop scalable, high-performance applications using React, Next.js, Node.js, Express, and TypeScript. With hands-on experience across healthcare, veterinary, wellness, and entertainment platforms, I build backend APIs, implement real-time communication systems, and ensure robust cloud deployments. My expertise spans MERN stack architecture, REST APIs, WebSockets, third-party integrations, AWS services, Docker, and production-level debugging and optimization.`,
+  summary: `MERN Stack Developer and Full Stack Engineer specialized in building production-grade web applications. I develop scalable, high-performance applications using React, Next.js, Node.js, Express, and TypeScript. With hands-on experience across AI voice calling agents, healthcare, veterinary, wellness, and real-time communication platforms, I build backend APIs, implement real-time speech and media pipelines (Twilio Voice, Google Gemini, Deepgram, ElevenLabs, RAG), and ensure robust cloud deployments. My expertise spans MERN stack architecture, REST APIs, WebSockets, AWS services, Docker, and production-level debugging and optimization.`,
   passion: "I am passionate about building real-world software that solves business problems. I focus on clean architecture, performance optimization, secure authentication systems, and scalable infrastructure. I thrive working on production applications that serve actual users and contribute to measurable business outcomes.",
   location: "Jaipur, India",
   relocation: "Available for freelance projects worldwide",
@@ -1148,15 +1180,16 @@ export const WORK_EXPERIENCE_DATA: ExperienceEntry[] = [
     company: "JPLoft",
     duration: "April 2026 – Present",
     location: "Jaipur, Rajasthan",
-     responsibilities: [
-    "Develop and maintain scalable full-stack applications using the MERN stack (MongoDB, Express.js, React.js, Node.js) with TypeScript.",
-    "Design and implement robust RESTful APIs and microservices architecture.",
-    "Integrate third-party APIs and services including payment gateways, communication platforms, and analytics tools.",
-    "Manage cloud deployments on AWS including S3, EC2, and RDS databases.",
-    "Implement WebSocket-based real-time communication systems.",
-    "Optimize application performance and implement comprehensive error handling.",
-    "Collaborate in agile teams to deliver production-ready solutions."
-  ],
+    responsibilities: [
+      "Architect and engineer real-time AI voice calling and conversational agent platforms (https://jploft-ai-agent.vercel.app/) using Twilio Voice, Google Gemini, Deepgram Flux, and ElevenLabs.",
+      "Implement agent-specific RAG pipelines with semantic similarity search and MongoDB vector knowledge storage.",
+      "Develop WebSocket-based real-time bidirectional audio streaming pipelines between Twilio Media Streams, Deepgram STT, and ElevenLabs TTS.",
+      "Build real-time interruption handling (barge-in playback cancellation) and WAIT intent management for natural phone conversations.",
+      "Develop and maintain scalable full-stack applications using the MERN stack (MongoDB, Express.js, React.js, Node.js) with TypeScript.",
+      "Design and implement robust RESTful APIs and microservices architecture.",
+      "Manage cloud deployments on AWS including S3, EC2, and RDS databases.",
+      "Collaborate in agile teams to deliver production-ready solutions."
+    ],
     Icon: Building,
   },
   {
@@ -1230,24 +1263,16 @@ export interface TechStackItem {
 }
 
 export const TECH_STACK_CATEGORIES_ORDER = [
-
+  "AI Agents & Voice Technologies",
   "Programming Languages",
-  
   "Frontend Development",
-  
   "Backend & Microservices",
-  
   "Databases & Caching",
-  
   "Cloud & AWS",
-  
   "DevOps & CI/CD",
-  
   "Networking & Monitoring",
-  
   "Deployment & Tools",
-  
-  ];
+];
   
 
 export const TECH_STACK: TechStackItem[] = [
@@ -1293,6 +1318,24 @@ export const TECH_STACK: TechStackItem[] = [
   { name: "System Design", Icon: Network, category: "Backend & Microservices" },
   { name: "Apache Kafka", Icon: Radio, category: "Backend & Microservices" },
   { name: "Event-Driven Architecture", Icon: Zap, category: "Backend & Microservices" },
+
+  // =============================
+  // AI Agents & Voice Technologies
+  // =============================
+
+  { name: "AI Agent Development", Icon: Bot, category: "AI Agents & Voice Technologies" },
+  { name: "Conversational AI Agents", Icon: MessageSquareText, category: "AI Agents & Voice Technologies" },
+  { name: "Autonomous AI Workflows", Icon: Rocket, category: "AI Agents & Voice Technologies" },
+  { name: "Multi-Agent Orchestration", Icon: Layers, category: "AI Agents & Voice Technologies" },
+  { name: "Google Gemini", Icon: Brain, category: "AI Agents & Voice Technologies" },
+  { name: "Gemini Live", Icon: Zap, category: "AI Agents & Voice Technologies" },
+  { name: "Twilio Voice", Icon: Phone, category: "AI Agents & Voice Technologies" },
+  { name: "Twilio Media Streams", Icon: Network, category: "AI Agents & Voice Technologies" },
+  { name: "Deepgram Flux (STT)", Icon: Radio, category: "AI Agents & Voice Technologies" },
+  { name: "ElevenLabs (TTS)", Icon: Zap, category: "AI Agents & Voice Technologies" },
+  { name: "RAG & Vector Embeddings", Icon: Database, category: "AI Agents & Voice Technologies" },
+  { name: "Real-Time Interruption & Barge-In", Icon: Activity, category: "AI Agents & Voice Technologies" },
+  { name: "WAIT / Hold Intent Handling", Icon: Activity, category: "AI Agents & Voice Technologies" },
 
   // =============================
   // Databases & Caching
@@ -1376,9 +1419,98 @@ export interface Project {
   githubRepoUrl: string;
   techStack: Pick<TechStackItem, 'name' | 'Icon'>[]; // Use Pick to only get name and Icon
   Icon: LucideIcon;
+  overview?: string;
+  contributions?: { title: string; description: string }[];
+  keyFeatures?: { title: string; description: string }[];
+  challenge?: { title: string; description: string; solutionTitle: string; solutionDescription: string };
 }
 
 export const PROJECTS_DATA: Project[] = [
+  {
+    id: "jploft-ai-agent",
+    title: "AI Voice Calling & Conversational Agent Platform",
+    description:
+      "Production-grade AI voice automation platform enabling businesses to create, configure, and manage intelligent AI agents for inbound and outbound phone calls. Features real-time two-way audio streaming via Twilio Media Streams, Deepgram Flux STT with turn detection, Google Gemini reasoning, ElevenLabs TTS, agent-specific RAG knowledge base via MongoDB, interruption/barge-in handling, WAIT intent management, and comprehensive call analytics.",
+    liveDemoUrl: "https://jploft-ai-agent.vercel.app/",
+    githubRepoUrl: "#",
+    techStack: [
+      { name: "Node.js", Icon: ServerCog },
+      { name: "Express.js", Icon: ServerCog },
+      { name: "React", Icon: CodeXml },
+      { name: "MongoDB", Icon: Database },
+      { name: "Twilio Voice", Icon: Phone },
+      { name: "WebSockets", Icon: Network },
+      { name: "Google Gemini", Icon: Brain },
+      { name: "Deepgram Flux", Icon: Radio },
+      { name: "ElevenLabs", Icon: Zap },
+      { name: "RAG & Embeddings", Icon: Database },
+    ],
+    Icon: Brain,
+    overview:
+      "An AI-powered voice calling platform that enables businesses to create, configure, and manage intelligent AI agents capable of making outbound calls, receiving inbound calls, answering customer questions, understanding natural speech, retrieving business information, and handling real-time conversations. The platform combines an admin dashboard, Node.js backend, Twilio telephony, Google Gemini, Deepgram speech recognition, ElevenLabs voice synthesis, and a knowledge-base system to deliver human-like AI phone conversations without requiring a human representative for every call.",
+    contributions: [
+      {
+        title: "Real-Time Telephony & Audio Transport Architecture",
+        description:
+          "Engineered two-way audio streaming architecture connecting Twilio Voice Media Streams to backend WebSockets with real-time μ-law and PCM audio format conversions.",
+      },
+      {
+        title: "Voice AI Pipeline & Multi-Model Orchestration",
+        description:
+          "Integrated Deepgram Flux for streaming STT with turn detection, Google Gemini and Gemini Live for conversational reasoning, and ElevenLabs for natural speech synthesis.",
+      },
+      {
+        title: "Agent-Specific RAG Knowledge Retrieval",
+        description:
+          "Implemented MongoDB-based knowledge storage with prompt-based indexing, text chunking, vector embeddings, semantic search, and in-memory caching to eliminate hallucinations.",
+      },
+      {
+        title: "Barge-In Interruption & WAIT/Hold Handling",
+        description:
+          "Built real-time caller interruption detection that instantly cancels ongoing AI speech and clears queued Twilio audio buffers, along with conversational WAIT/hold intent recognition.",
+      },
+    ],
+    keyFeatures: [
+      {
+        title: "Admin Dashboard & Agent Management",
+        description:
+          "Centralized configuration of multi-agent personalities, prompts, voices, Twilio phone numbers, and knowledge bases with live call monitoring.",
+      },
+      {
+        title: "Outbound & Inbound Call Automation",
+        description:
+          "Automated outbound PSTN calling campaigns and inbound routing with dynamic TwiML generation and WebSocket-based audio sessions.",
+      },
+      {
+        title: "Real-Time Interruption & Barge-In",
+        description:
+          "Detects caller speech during playback, stops active TTS generation, and clears Twilio buffers to prevent stale audio playback.",
+      },
+      {
+        title: "WAIT / Hold State Management",
+        description:
+          "Recognizes hold requests like 'Wait' or 'Hold on a second', pausing AI generation while preserving full conversational context.",
+      },
+      {
+        title: "Knowledge Base & Semantic RAG",
+        description:
+          "Indexes business documentation into MongoDB vectors, dynamically invoking search tools during calls to answer queries accurately.",
+      },
+      {
+        title: "Call Analytics & Audio Diagnostics",
+        description:
+          "Tracks call duration, lifecycle statuses, full transcripts, latency measurements, and real-time audio pipeline health metrics.",
+      },
+    ],
+    challenge: {
+      title: "Challenge: Ultra-Low-Latency Bidirectional Audio & Natural Conversational Flow",
+      description:
+        "Standard request-response HTTP architectures fail on telephone calls. Achieving human-like phone conversations requires streaming audio continuously across PSTN telephony, WebSockets, STT, LLM reasoning, and TTS with sub-second response times and seamless interruption handling.",
+      solutionTitle: "Solution: Asynchronous Media Streaming with Event-Driven Pipeline & Buffer Cancellation",
+      solutionDescription:
+        "Architected a streaming WebSocket pipeline bridging Twilio Media Streams, Deepgram Flux STT for streaming transcription and turn classification, streaming Gemini token generation, and ElevenLabs chunked TTS audio playback. Implemented an instant cancellation mechanism that clears Twilio audio buffers the moment caller speech is detected during AI speech.",
+    },
+  },
   {
     id: "kinnect",
     title: "Kinnect – Veterinary Healthcare Platform",
@@ -1722,7 +1854,7 @@ export const EMAILJS_CONFIG = {
 };
 
 export function getProjectById(id: string): Project | undefined {
-  return PROJECTS_DATA.find((p) => p.id === id);
+  return PROJECTS_DATA.find((p) => p.id === id || (p.id === "jploft-ai-agent" && id === "ai-voice-agent"));
 }
 
 export function getServiceById(id: string): ServiceCard | undefined {

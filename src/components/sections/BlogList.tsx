@@ -85,7 +85,7 @@ const hardcodedBlogPosts = [
 ];
 
 
-function BlogCardSkeleton({ cardKey }: { cardKey: string }) {
+function BlogCardSkeleton({ cardKey }: { cardKey?: string }) {
   return (
     <Card key={cardKey} className="flex flex-col shadow-lg bg-card">
       <CardHeader>
